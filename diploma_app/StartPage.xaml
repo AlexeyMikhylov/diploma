@@ -68,7 +68,7 @@
                             </Button.Resources>
                         </Button>
 
-                        <Button x:Name="btn_toReportPage" Click="btn_toReportPage_Click" Content="Отчет" Height="35" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                        <Button x:Name="btn_toReportPage" Padding="0,0,20,0" Click="btn_toReportPage_Click" Content="Отчет" Height="35" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
