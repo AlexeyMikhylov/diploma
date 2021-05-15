@@ -1,0 +1,153 @@
+﻿<Page x:Class="diploma_app.StartPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:charts="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+      xmlns:local="clr-namespace:diploma_app"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StartPage" Loaded="Page_Loaded">
+
+    <Grid>
+        <!-- Content -->
+        <Grid Grid.Row="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <!-- Buttons -->
+
+            <Border Grid.Row="0" Grid.Column="0" Margin="5" Background="Transparent" CornerRadius="10" BorderThickness="1" BorderBrush="Black">
+                <StackPanel VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Button x:Name="btn_IncidentCatalog" Content="Происшествие" Height="35" Margin="0,0,0,10" Grid.Row="0" Grid.Column="1" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5,0,0,5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button x:Name="btn_IncidentAdd" Click="btn_IncidentAdd_Click" Content="+" Margin="0,0,0,10" Grid.Row="0" Grid.Column="2" FontSize="20" Padding="0,0,0,5" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="0,5,5,0"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Content="Лицо" Height="35" Margin="0,0,0,10" Grid.Row="1" Grid.Column="1" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5,0,0,5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Content="+" Margin="0,0,0,10" Grid.Row="1" Grid.Column="2" FontSize="20" Padding="0,0,0,5" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="0,5,5,0"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button x:Name="btn_toReportPage" Click="btn_toReportPage_Click" Content="Отчет" Height="35" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <!-- Buttons -->
+
+            <!-- Graph -->
+            <Border Grid.Row="0" Grid.Column="1" Background="Transparent" CornerRadius="10" Margin="5" BorderThickness="1" BorderBrush="Black">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Происшествий: " FontSize="14" Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="вчера - 18" FontSize="14" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="сегодня - 10" FontSize="14" Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="Происшествий за последние 7 дней:" FontSize="14" Grid.Row="1" Grid.ColumnSpan="3"/>
+
+                    <!-- graph -->
+
+                    <WindowsFormsHost Grid.Row="2" Grid.ColumnSpan="4" Margin="3,0,3,3">
+                        <charts:Chart x:Name="chart">
+                            <charts:Chart.Legends>
+                                <charts:Legend>
+
+                                </charts:Legend>
+                            </charts:Chart.Legends>
+                        </charts:Chart>
+                    </WindowsFormsHost>
+
+                    <!-- graph -->
+                </Grid>
+
+            </Border>
+            <!-- Graph -->
+
+            <!-- Incidents -->
+            <Border Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" CornerRadius="10" Margin="5" BorderThickness="1" BorderBrush="Black">
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="99*"/>
+                        <ColumnDefinition Width="5*" MaxWidth="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" MinHeight="30" MaxHeight="30"/>
+                        <RowDefinition Height="10*" MinHeight="200"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="+" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalContentAlignment="Center" Padding="0,0,0,0" Background="#008000" Foreground="White" BorderBrush="Black" Margin="0,2,5,0" >
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,0,0"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <DataGrid x:Name="dtgrid_incidents" Grid.Row="2" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="0,1,0,0" Background="White" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="5,0,5,5"/>
+
+                </Grid>
+
+            </Border>
+            <!-- Incidents -->
+
+        </Grid>
+        <!-- Content -->
+    </Grid>
+</Page>

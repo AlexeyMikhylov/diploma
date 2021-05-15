@@ -1,0 +1,45 @@
+﻿<Window x:Class="diploma_app.MainPageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:diploma_app"
+        mc:Ignorable="d"
+        Title="Регистрация происшествий" Height="450" Width="800" WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized" Loaded="Window_Loaded" Icon="Resources/diploma_app_logo.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" MaxHeight="38"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="Transparent" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" MaxWidth="37"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btn_signOut" Content="❌" FontSize="14" Padding="0,0,0,1" Foreground="White" Background="#FF0000" BorderBrush="Black" Grid.Column="0" Margin="5" Click="btn_signOut_Click" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Label x:Name="lbl_user" Content="login" FontSize="16" Grid.Column="1" Margin="3"/>
+
+                <Label x:Name="lbl_dayInfo" Content="Среда, 12:00 12.05.2021 ⛅" FontSize="16" Grid.Column="3" Margin="3" HorizontalContentAlignment="Right"/>
+            </Grid>
+        </Border>
+        <!-- Header -->
+
+        <!-- Navigational frame for pages-->
+        <Frame x:Name="MainFrame" Grid.Row="1"/>
+        <!-- Navigational frame for pages-->
+    </Grid>
+</Window>

@@ -1,0 +1,82 @@
+﻿<Window x:Class="diploma_app.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:diploma_app"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="Resources/diploma_app_logo.png">
+
+    <Grid Margin="0, 0, 0, 100">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition MaxWidth="400" Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center" Grid.Column="1">
+            <Label Content="Логин" FontSize="16" Margin="0, 0, 0, 10" />
+            <TextBox x:Name="txtbx_login" FontSize="18" Margin="0, 0, 0, 10" Height="35" BorderBrush="Black" Padding="5,5,0,0">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Label Content="Пароль" FontSize="16" Margin="0, 0, 0, 10" />
+
+            <Grid Grid.Column="1" Margin="0, 0, 0, 40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="txtbx_password" FontSize="18" Grid.ColumnSpan="11" Visibility="Collapsed" Height="35" Padding="5,5,0,0" BorderBrush="Black">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5, 0, 0, 5"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <PasswordBox x:Name="pswrdbx_password" Template="{StaticResource passwordbox}" FontSize="18" Padding="5,5,0,0" Grid.ColumnSpan="11" Visibility="Visible" Height="35"/>
+
+                <Button x:Name="btn_showPswrd" Content="⌒" Grid.Column="11" Click="btn_showPswrd_Click" RenderTransformOrigin="0.5,0.5" Background="White" Height="35" BorderBrush="Black">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5, 0, 0, 5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+
+            <Button x:Name="btn_signIn" Content="Вход" FontSize="18" Background="DodgerBlue" Foreground="White" Height="35" BorderBrush="Black" Click="btn_signIn_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
