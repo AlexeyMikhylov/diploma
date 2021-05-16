@@ -51,7 +51,7 @@ namespace diploma_app
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            string emoji = "";
+            string emoji;
 
             string dateTime = DateTime.Now.ToString("HH");
             if (Convert.ToInt32(dateTime) >= 4 && Convert.ToInt32(dateTime) <= 11)
