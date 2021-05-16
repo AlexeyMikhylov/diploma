@@ -20,60 +20,75 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="О происшествии" Grid.Row="0" Grid.Column="0" BorderBrush="Black">
-            <StackPanel>
-                <Label Content="Дата и время" />
-                <DatePicker />
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Label Content="Дата и время" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
 
-                <Label Content="Фабула" />
-                <RichTextBox MaxHeight="100"/>
+                        <DatePicker x:Name="dtpckr_incident_date" Grid.Column="0" Margin="0,0,5,0" CalendarClosed="dtpckr_incident_date_CalendarClosed"/>
+                        <TextBox x:Name="txtbx_hour" Grid.Column="1" MaxLength="2"/>
+                        <Label Content=":" Grid.Column="2" HorizontalContentAlignment="Center"/>
+                        <TextBox x:Name="txtbx_minute" Grid.Column="3" MaxLength="2"/>
+                    </Grid>
 
-                <Label Content="Вид происшествия"/>
-                <ComboBox x:Name="cmbbx_IncidentType" SelectedIndex="0">
-                    <ComboBoxItem Content="Выберите"/>
-                    <ComboBoxItem Content="Преступление"/>
-                    <ComboBoxItem Content="Административное правонарушение"/>
-                    <ComboBoxItem Content="ДТП"/>
-                    <ComboBoxItem Content="ЧС"/>
-                    <ComboBoxItem Content="Другое"/>
-                </ComboBox>
+                    <Label Content="Фабула" />
+                    <TextBox x:Name="txtbx_summary" />
 
-                <Label Content="Форма фиксации"/>
-                <ComboBox x:Name="cmbbx_FixationForm" SelectedIndex="0">
-                    <ComboBoxItem Content="Выберите" />
-                    <ComboBoxItem Content="Устное заявление" />
-                    <ComboBoxItem Content="Письменное заявление" />
-                    <ComboBoxItem Content="Явка с повинной" />
-                    <ComboBoxItem Content="Сообщение от уполномоченного" />
-                    <ComboBoxItem Content="Другое" />
-                </ComboBox>
-            </StackPanel>
+                    <Label Content="Вид происшествия"/>
+                    <ComboBox x:Name="cmbbx_IncidentType" SelectedIndex="0">
+                        <ComboBoxItem Content="Выберите"/>
+                        <ComboBoxItem Content="Преступление"/>
+                        <ComboBoxItem Content="Административное правонарушение"/>
+                        <ComboBoxItem Content="ДТП"/>
+                        <ComboBoxItem Content="ЧС"/>
+                        <ComboBoxItem Content="Другое"/>
+                    </ComboBox>
+
+                    <Label Content="Форма фиксации"/>
+                    <ComboBox x:Name="cmbbx_FixationForm" SelectedIndex="0">
+                        <ComboBoxItem Content="Выберите" />
+                        <ComboBoxItem Content="Устное заявление" />
+                        <ComboBoxItem Content="Письменное заявление" />
+                        <ComboBoxItem Content="Явка с повинной" />
+                        <ComboBoxItem Content="Сообщение от уполномоченного" />
+                        <ComboBoxItem Content="Другое" />
+                    </ComboBox>
+                </StackPanel>
+            </ScrollViewer>
         </GroupBox>
 
         <GroupBox Header="Место происшествия" Grid.Row="1" Grid.Column="0" BorderBrush="Black">
             <StackPanel>
                 <Label Content="Город" />
-                <TextBox />
+                <TextBox x:Name="txtbx_city" />
                 <Label Content="Улица" />
-                <TextBox />
+                <TextBox x:Name="txtbx_street" />
                 <Label Content="Дом" />
-                <TextBox />
+                <TextBox x:Name="txtbx_building" />
                 <Label Content="Строение, квартира, и др." />
-                <TextBox />
+                <TextBox x:Name="txtbx_comment" />
             </StackPanel>
         </GroupBox>
 
         <GroupBox Header="О заявителе" Grid.RowSpan="2" Grid.Column="1" BorderBrush="Black">
             <StackPanel>
+                <RadioButton x:Name="rdbtn_anonym" Content="Аноним" VerticalContentAlignment="Center" Checked="rdbtn_anonym_Checked" />
                 <Label Content="Фамилия" />
-                <TextBox />
+                <TextBox x:Name="txtbx_last_name" />
                 <Label Content="Имя" />
-                <TextBox />
+                <TextBox x:Name="txtbx_first_name" />
                 <Label Content="Отчество" />
-                <TextBox />
+                <TextBox x:Name="txtbx_patronymic" />
                 <Label Content="Адрес" />
-                <TextBox />
+                <TextBox x:Name="txtbx_registration_address" />
                 <Label Content="Телефон" />
-                <TextBox />
+                <TextBox x:Name="txtbx_phone" />
                 <Label Content="Гражданство" />
                 <ComboBox x:Name="cmbbx_Citizenship" SelectedIndex="0" >
                     <ComboBoxItem Content="Выберите" />
@@ -91,21 +106,21 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="btn_IncidentCancel" Content="Удалить" Grid.Column="0" BorderBrush="Black" Margin="5,5,0,5" Background="#FF0000" Foreground="White">
+            <Button x:Name="btn_IncidentCancel" Content="Отмена" Grid.Column="0" BorderBrush="Black" Margin="5,5,0,5" Background="#FF0000" Foreground="White">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="btn_PersonAdd" Content="Добавить лицо" Grid.Column="1" BorderBrush="Black" Margin="5" Background="#1E90FF" Foreground="White">
+            <Button x:Name="btn_PersonAdd" Content="Отправить и добавить лицо" Grid.Column="1" BorderBrush="Black" Margin="5" Background="#1E90FF" Foreground="White">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="btn_IncidentAdd" Content="Готово" Grid.Column="2" BorderBrush="Black" Margin="0,5,5,5" Background="#008000" Foreground="White">
+            <Button x:Name="btn_IncidentAdd" Content="Отправить" Grid.Column="2" BorderBrush="Black" Margin="0,5,5,5" Background="#008000" Foreground="White" Click="btn_IncidentAdd_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

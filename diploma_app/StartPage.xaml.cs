@@ -79,9 +79,16 @@ namespace diploma_app
             // to do sql query
         }
 
+        private void DateFormat()
+        {
+            ((DataGridTextColumn)dtgrid_incidents.Columns[0]).Binding.StringFormat = "dd.MM.yyyy HH:mm";
+        }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             FillDataGrid();
+
+            DateFormat();
 
             chart.Series["Происшествия"].ChartArea = "Default";
             //chart.Series["Series1"].ChartType = SeriesChartType.Line;

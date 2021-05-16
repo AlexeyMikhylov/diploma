@@ -27,61 +27,184 @@ namespace diploma_app
         {
             InitializeComponent();
         }
-
+        //если нет в базе адреса
         private void InsertIncidentAddress()
-        {
+        {            
             connection.Open();
-            string SqlInsert = "";
+            string SqlInsert = "Insert Into diploma_IncidentAddress (city, street, building, comment) " +
+                "Values ('" + txtbx_city.Text + "', '" + txtbx_street.Text + "', " +
+                "'" + txtbx_building.Text + "', '" + txtbx_comment.Text + "')";
+
+            SqlCommand command = new SqlCommand(SqlInsert, connection);
+            command.ExecuteNonQuery();
 
             connection.Close();
         }
 
-        private void GetIncidentAddresId()
+        private string GetIncidentAddresId()
         {
             connection.Open();
-            string SqlSelect = "";
+            string SqlSelect = "Select id_incident_address From diploma_IncidentAddress " +
+                "Where city = '" + txtbx_city.Text + "' and street = '" + txtbx_street.Text + "' " +
+                "and building = '" + txtbx_building.Text + "' and comment = '" + txtbx_comment.Text + "'";
+            SqlCommand command = new SqlCommand(SqlSelect, connection);
+
+            string id_incident_address = command.ExecuteScalar().ToString(); //error returned null
 
             connection.Close();
+
+            return id_incident_address;
         }
 
         private void InsertIncident()
         {
             connection.Open();
-            string SqlInsert = "";
+            string SqlInsert = "Insert Into diploma_KRSP ([incident_date], [summary], " +
+                "[id_incident_address], [id_incident_type], [id_fixation_from]) " +
+                "Values ('" + dtpckr_incident_date.Text + " " + txtbx_hour.Text + ":" + txtbx_minute.Text + "', " +
+                "'" + txtbx_summary.Text + "', " +
+                "'" + GetIncidentAddresId() + "', '" + cmbbx_IncidentType.SelectedIndex + "', " +
+                "'" + cmbbx_FixationForm.SelectedIndex + "')";
+            SqlCommand command = new SqlCommand(SqlInsert, connection);
+            command.ExecuteNonQuery();
 
             connection.Close();
+        }
+
+        private string GetIncidentId()
+        {
+            connection.Open();
+
+            string SqlSelect = "Select id_incident " +
+                "From diploma_KRSP " +
+                "Where(DATEPART(yy, incident_date) = " + dtpckr_incident_date.Text.Substring(6) + " " +
+                "and DATEPART(mm, incident_date) = " + dtpckr_incident_date.Text.Substring(3).Remove(2) + " " +
+                "and DATEPART(dd, incident_date) = " + dtpckr_incident_date.Text.Remove(2) + " " +
+                "and DATEPART(HH, incident_date) = " + txtbx_hour.Text + " " +
+                "and DATEPART(MINUTE, incident_date) = " + txtbx_minute.Text + ")";
+
+            SqlCommand command = new SqlCommand(SqlSelect, connection);
+
+            string IncidentId = command.ExecuteScalar().ToString();
+
+            connection.Close();
+
+            return IncidentId;
         }
 
         private void InsertPerson()
         {
             connection.Open();
-            string SqlInsert = "";
+            string SqlInsert = "Insert Into diploma_Person ([last_name], [first_name], " +
+                "[patronymic], [registration_address], [phone], [id_citizenship]) " +
+                "Values ('" + txtbx_last_name.Text + "', '" + txtbx_first_name.Text + "', " +
+                "'" + txtbx_patronymic.Text + "', '" + txtbx_registration_address.Text + "', " +
+                "'" + txtbx_phone.Text + "', '" + cmbbx_Citizenship.SelectedIndex + "')";
+            SqlCommand command = new SqlCommand(SqlInsert, connection);
+            command.ExecuteNonQuery();
 
             connection.Close();
         }
 
-        private void GetIncidentId()
+        private string GetPersonId()
         {
             connection.Open();
-            string SqlSelect = "";
+            string SqlSelect = "Select [last_name], [first_name], [patronymic], " +
+                "[registration_address], [phone], [id_citizenship] " +
+                "From diploma_Person " +
+                "Where [last_name] = '" + txtbx_last_name.Text + "' and [first_name] = '" + txtbx_first_name.Text + "' " +
+                "and [patronymic] = '" + txtbx_patronymic.Text + "' " +
+                "and [registration_address] = '" + txtbx_registration_address.Text + "' " +
+                "and [phone] = '" + txtbx_phone.Text + "' and [id_citizenship] = '" + cmbbx_Citizenship.SelectedIndex + "'";
+            SqlCommand command = new SqlCommand(SqlSelect, connection);
+
+            string PersonId = command.ExecuteScalar().ToString();
 
             connection.Close();
+
+            return PersonId;
         }
 
-        private void GetPersonId()
-        {
-            connection.Open();
-            string SqlSelect = "";
-
-            connection.Close();
-        }
-
+        //не анонимно
         private void InsertInvolved()
         {
             connection.Open();
-            string SqlInsert = "";
+            string SqlInsert = "Insert Into diploma_Involed ([id_incident], [id_person], [attitude]) " +
+                "Values ('" + GetIncidentId() + "', '" + GetPersonId() + "', 'Заявитель')";
+            SqlCommand command = new SqlCommand(SqlInsert, connection);
+            command.ExecuteNonQuery();
 
             connection.Close();
+        }
+
+        //анонимно
+        private void InsertInvolvedAnonym()
+        {
+            //аноним: | 4 | Аноним | - | - | - | 0 | 3 |
+            connection.Open();
+            string SqlInsert = "Insert Into diploma_Involed ([id_incident], [id_person], [attitude]) " +
+                "Values ('"+GetIncidentId()+"', '4', 'Заявитель')";
+            SqlCommand command = new SqlCommand(SqlInsert, connection);
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+
+        private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtbx_city.Text == "" || txtbx_street.Text == "" ||
+                txtbx_building.Text == "" || txtbx_comment.Text == "" ||
+                txtbx_last_name.Text == "" || txtbx_first_name.Text == "" ||
+                txtbx_patronymic.Text == "" || txtbx_registration_address.Text == "" ||
+                txtbx_phone.Text == "" || txtbx_summary.Text == "" || 
+                txtbx_hour.Text == "" || txtbx_minute.Text == "" ||
+                cmbbx_Citizenship.SelectedIndex == 0 || cmbbx_FixationForm.SelectedIndex == 0 ||
+                cmbbx_IncidentType.SelectedIndex == 0 || txtbx_hour.Text.Length < 2 || txtbx_minute.Text.Length < 2)
+            {
+                MessageBox.Show("Заполните все данные.");
+            }
+            else
+            {
+                //вставка адреса
+                if (GetIncidentAddresId() == "" || GetIncidentAddresId() == null)
+                {
+                    InsertIncidentAddress();
+                }
+                //вставка происшествия
+                InsertIncident();
+                //вставка лица
+                if (GetPersonId() == "" || GetPersonId() == null)
+                {
+                    InsertPerson();
+                }
+                //вставка причастных
+                if (rdbtn_anonym.IsChecked == true)
+                {
+                    GetIncidentId();
+                    InsertInvolvedAnonym();
+                }
+                else
+                {
+                    GetIncidentId();
+                    InsertInvolved();
+                }
+
+                MessageBox.Show("Успешно");
+            }
+        }
+
+        private void rdbtn_anonym_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dtpckr_incident_date_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(dtpckr_incident_date.Text);
+
+            Console.WriteLine(dtpckr_incident_date.Text.Remove(2)); //day
+            Console.WriteLine(dtpckr_incident_date.Text.Substring(3).Remove(2)); //month
+            Console.WriteLine(dtpckr_incident_date.Text.Substring(6)); //year
         }
     }
 }
