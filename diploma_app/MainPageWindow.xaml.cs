@@ -72,7 +72,7 @@ namespace diploma_app
             }
 
             // Обновляем лейбл показывающий текущие день и время
-            lbl_dayInfo.Content = DateTime.Now.ToString("dddd") + ", " + DateTime.Now.ToString("HH:mm:ss:ff") + " " + DateTime.Now.ToString("dd.MM.yyyy") + " " + emoji;
+            lbl_dayInfo.Content = DateTime.Now.ToString("dddd") + ", " + DateTime.Now.ToString("HH:mm:ss") + " " + DateTime.Now.ToString("dd.MM.yyyy") + " " + emoji;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -83,21 +83,6 @@ namespace diploma_app
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += Timer_Tick;
             LiveTime.Start();
-
-            /* \/ graph \/ */
-            /*double[] x = new double[200];
-            for (int i = 0; i < x.Length; i++)
-                x[i] = 3.1415 * i / (x.Length - 1);
-
-            for (int i = 0; i < 25; i++)
-            {
-                var lg = new LineGraph();
-                lines.Children.Add(lg);
-                lg.Stroke = new SolidColorBrush(Color.FromArgb(255, 0, (byte)(i * 10), 0));
-                lg.Description = String.Format("Data series {0}", i + 1);
-                lg.StrokeThickness = 2;
-                lg.Plot(x, x.Select(v => Math.Sin(v + i / 10.0)).ToArray());
-            }*/
         }
 
         public class VisibilityToCheckedConverter : IValueConverter

@@ -10,38 +10,110 @@
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="400"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*" MinHeight="30" MaxHeight="35"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center" Width="400">
+        <GroupBox Header="О происшествии" Grid.Row="0" Grid.Column="0" BorderBrush="Black">
+            <StackPanel>
+                <Label Content="Дата и время" />
+                <DatePicker />
 
-            <Label Content="Когда это произошло?" />
-            <DatePicker x:Name="dtpcr_date" Margin="0,5,0,5"/>
+                <Label Content="Фабула" />
+                <RichTextBox MaxHeight="100"/>
 
-            <Label Content="Что произошло?" />
-            <TextBox x:Name="txtbx_summary" Margin="0,5,0,5"/>
+                <Label Content="Вид происшествия"/>
+                <ComboBox x:Name="cmbbx_IncidentType" SelectedIndex="0">
+                    <ComboBoxItem Content="Выберите"/>
+                    <ComboBoxItem Content="Преступление"/>
+                    <ComboBoxItem Content="Административное правонарушение"/>
+                    <ComboBoxItem Content="ДТП"/>
+                    <ComboBoxItem Content="ЧС"/>
+                    <ComboBoxItem Content="Другое"/>
+                </ComboBox>
 
-            <Label Content="Где это произошо?" />
-            <TextBox  Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
+                <Label Content="Форма фиксации"/>
+                <ComboBox x:Name="cmbbx_FixationForm" SelectedIndex="0">
+                    <ComboBoxItem Content="Выберите" />
+                    <ComboBoxItem Content="Устное заявление" />
+                    <ComboBoxItem Content="Письменное заявление" />
+                    <ComboBoxItem Content="Явка с повинной" />
+                    <ComboBoxItem Content="Сообщение от уполномоченного" />
+                    <ComboBoxItem Content="Другое" />
+                </ComboBox>
+            </StackPanel>
+        </GroupBox>
 
-            <Label Content="Вид происшествия" />
-            <ComboBox />
+        <GroupBox Header="Место происшествия" Grid.Row="1" Grid.Column="0" BorderBrush="Black">
+            <StackPanel>
+                <Label Content="Город" />
+                <TextBox />
+                <Label Content="Улица" />
+                <TextBox />
+                <Label Content="Дом" />
+                <TextBox />
+                <Label Content="Строение, квартира, и др." />
+                <TextBox />
+            </StackPanel>
+        </GroupBox>
 
-            <Label Content="Форма фиксации" />
-            <ComboBox />
+        <GroupBox Header="О заявителе" Grid.RowSpan="2" Grid.Column="1" BorderBrush="Black">
+            <StackPanel>
+                <Label Content="Фамилия" />
+                <TextBox />
+                <Label Content="Имя" />
+                <TextBox />
+                <Label Content="Отчество" />
+                <TextBox />
+                <Label Content="Адрес" />
+                <TextBox />
+                <Label Content="Телефон" />
+                <TextBox />
+                <Label Content="Гражданство" />
+                <ComboBox x:Name="cmbbx_Citizenship" SelectedIndex="0" >
+                    <ComboBoxItem Content="Выберите" />
+                    <ComboBoxItem Content="Гражданин РФ" />
+                    <ComboBoxItem Content="Гражданин иностранного государства" />
+                    <ComboBoxItem Content="Нет гражданства" />
+                </ComboBox>
+            </StackPanel>
+        </GroupBox>
 
-            <Label Content="Заявитель" />
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            <TextBox Margin="0,5,0,5"/>
-            
-        </StackPanel>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_IncidentCancel" Content="Удалить" Grid.Column="0" BorderBrush="Black" Margin="5,5,0,5" Background="#FF0000" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btn_PersonAdd" Content="Добавить лицо" Grid.Column="1" BorderBrush="Black" Margin="5" Background="#1E90FF" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btn_IncidentAdd" Content="Готово" Grid.Column="2" BorderBrush="Black" Margin="0,5,5,5" Background="#008000" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </Grid>
 
     </Grid>
 </Page>
