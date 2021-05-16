@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace diploma_app
 {
@@ -20,6 +21,8 @@ namespace diploma_app
     /// </summary>
     public partial class AddIncidentPage : Page
     {
+        SqlConnection connection = new SqlConnection(App.ConnectionString);
+
         public AddIncidentPage()
         {
             InitializeComponent();
@@ -27,37 +30,58 @@ namespace diploma_app
 
         private void InsertIncidentAddress()
         {
+            connection.Open();
+            string SqlInsert = "";
 
+            connection.Close();
         }
 
         private void GetIncidentAddresId()
         {
+            connection.Open();
+            string SqlSelect = "";
 
+            connection.Close();
         }
 
         private void InsertIncident()
         {
+            connection.Open();
+            string SqlInsert = "";
 
+            connection.Close();
         }
 
         private void InsertPerson()
         {
+            connection.Open();
+            string SqlInsert = "";
 
+            connection.Close();
         }
 
         private void GetIncidentId()
         {
+            connection.Open();
+            string SqlSelect = "";
 
+            connection.Close();
         }
 
         private void GetPersonId()
         {
+            connection.Open();
+            string SqlSelect = "";
 
+            connection.Close();
         }
 
         private void InsertInvolved()
         {
+            connection.Open();
+            string SqlInsert = "";
 
+            connection.Close();
         }
     }
 }
