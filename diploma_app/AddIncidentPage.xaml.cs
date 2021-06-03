@@ -36,7 +36,7 @@ namespace diploma_app
                 "'" + txtbx_building.Text + "', '" + txtbx_comment.Text + "')";
 
             SqlCommand command = new SqlCommand(SqlInsert, connection);
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery(); //усечение в БД (сделать больше varchar там 50 или 150)
 
             connection.Close();
         }
@@ -49,7 +49,17 @@ namespace diploma_app
                 "and building = '" + txtbx_building.Text + "' and comment = '" + txtbx_comment.Text + "'";
             SqlCommand command = new SqlCommand(SqlSelect, connection);
 
-            string id_incident_address = command.ExecuteScalar().ToString(); //error returned null
+            //string id_incident_address = command.ExecuteScalar().ToString(); //error returned null
+            string id_incident_address;
+
+            if (command.ExecuteScalar() == null)
+            {
+                id_incident_address = "";
+            }
+            else
+            {
+                id_incident_address = command.ExecuteScalar().ToString();
+            }
 
             connection.Close();
 
