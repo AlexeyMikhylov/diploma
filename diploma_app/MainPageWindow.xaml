@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:diploma_app"
         mc:Ignorable="d"
         Title="Регистрация происшествий" Height="450" Width="800" WindowStartupLocation="CenterScreen" 
-        WindowState="Maximized" Loaded="Window_Loaded" Icon="Resources/diploma_app_logo.png">
+        WindowState="Maximized" Loaded="Window_Loaded" Icon="Resources/newlogo.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" MaxHeight="38"/>
