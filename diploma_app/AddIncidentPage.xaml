@@ -106,7 +106,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="btn_IncidentCancel" Content="Отмена" Grid.Column="0" BorderBrush="Black" Margin="5,5,0,5" Background="#FF0000" Foreground="White">
+            <Button x:Name="btn_IncidentCancel" Content="Отмена" Grid.Column="0" BorderBrush="Black" Margin="5,5,0,5" Background="#FF0000" Foreground="White" Click="btn_IncidentCancel_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

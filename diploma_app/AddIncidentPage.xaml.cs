@@ -178,7 +178,7 @@ namespace diploma_app
             connection.Close();
         }
 
-        //
+        //тут происходит МЯСО РЕЗНЯ ТРЕШ
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtbx_city.Text == "" || txtbx_street.Text == "" ||
@@ -234,6 +234,11 @@ namespace diploma_app
             //Console.WriteLine(dtpckr_incident_date.Text.Remove(2)); //day
             //Console.WriteLine(dtpckr_incident_date.Text.Substring(3).Remove(2)); //month
             //Console.WriteLine(dtpckr_incident_date.Text.Substring(6)); //year
+        }
+
+        private void btn_IncidentCancel_Click(object sender, RoutedEventArgs e)
+        {
+            //клин энд клир эврисынг
         }
     }
 }
