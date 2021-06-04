@@ -178,7 +178,7 @@ namespace diploma_app
             connection.Close();
         }
 
-        //тут происходит МЯСО РЕЗНЯ ТРЕШ
+        //сок
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtbx_city.Text == "" || txtbx_street.Text == "" ||

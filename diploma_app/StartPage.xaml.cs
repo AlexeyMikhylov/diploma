@@ -72,11 +72,15 @@ namespace diploma_app
         private void CountIncidentsYesterday()
         {
             // to do sql query
+
+            //return number
         }
 
         private void CountIncidentsToday()
         {
             // to do sql query
+
+            //return number
         }
 
         private void DateFormat()
@@ -103,6 +107,11 @@ namespace diploma_app
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddIncidentPage());
+        }
+
+        private void btn_IncidentCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new IncidentPage());
         }
     }
 }
