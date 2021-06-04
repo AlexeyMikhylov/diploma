@@ -27,6 +27,7 @@ namespace diploma_app
         {
             InitializeComponent();
         }
+
         //если нет в базе адреса
         private void InsertIncidentAddress()
         {            
@@ -36,20 +37,21 @@ namespace diploma_app
                 "'" + txtbx_building.Text + "', '" + txtbx_comment.Text + "')";
 
             SqlCommand command = new SqlCommand(SqlInsert, connection);
-            command.ExecuteNonQuery(); //усечение в БД (сделать больше varchar там 50 или 150)
+            command.ExecuteNonQuery();
 
             connection.Close();
         }
 
+        //если есть такой адрес, то берем его ID
         private string GetIncidentAddresId()
         {
+            connection.Close();
             connection.Open();
             string SqlSelect = "Select id_incident_address From diploma_IncidentAddress " +
                 "Where city = '" + txtbx_city.Text + "' and street = '" + txtbx_street.Text + "' " +
                 "and building = '" + txtbx_building.Text + "' and comment = '" + txtbx_comment.Text + "'";
             SqlCommand command = new SqlCommand(SqlSelect, connection);
 
-            //string id_incident_address = command.ExecuteScalar().ToString(); //error returned null
             string id_incident_address;
 
             if (command.ExecuteScalar() == null)
@@ -66,6 +68,7 @@ namespace diploma_app
             return id_incident_address;
         }
 
+        //Вставка Происшествия
         private void InsertIncident()
         {
             connection.Open();
@@ -76,13 +79,16 @@ namespace diploma_app
                 "'" + GetIncidentAddresId() + "', '" + cmbbx_IncidentType.SelectedIndex + "', " +
                 "'" + cmbbx_FixationForm.SelectedIndex + "')";
             SqlCommand command = new SqlCommand(SqlInsert, connection);
+            connection.Open();
             command.ExecuteNonQuery();
 
             connection.Close();
         }
 
+        //Берем ID происшествия, по дате и времени (мб еще адрес добавить)
         private string GetIncidentId()
         {
+            connection.Close();
             connection.Open();
 
             string SqlSelect = "Select id_incident " +
@@ -102,6 +108,7 @@ namespace diploma_app
             return IncidentId;
         }
 
+        //Вставка Лица
         private void InsertPerson()
         {
             connection.Open();
@@ -116,11 +123,11 @@ namespace diploma_app
             connection.Close();
         }
 
+        //Берем ID лица
         private string GetPersonId()
         {
             connection.Open();
-            string SqlSelect = "Select [last_name], [first_name], [patronymic], " +
-                "[registration_address], [phone], [id_citizenship] " +
+            string SqlSelect = "Select [id_person] " +
                 "From diploma_Person " +
                 "Where [last_name] = '" + txtbx_last_name.Text + "' and [first_name] = '" + txtbx_first_name.Text + "' " +
                 "and [patronymic] = '" + txtbx_patronymic.Text + "' " +
@@ -128,38 +135,50 @@ namespace diploma_app
                 "and [phone] = '" + txtbx_phone.Text + "' and [id_citizenship] = '" + cmbbx_Citizenship.SelectedIndex + "'";
             SqlCommand command = new SqlCommand(SqlSelect, connection);
 
-            string PersonId = command.ExecuteScalar().ToString();
+            string PersonId;
+
+            if (command.ExecuteScalar() == null)
+            {
+                PersonId = "";
+            }
+            else
+            {
+                PersonId = command.ExecuteScalar().ToString();
+            }
 
             connection.Close();
 
             return PersonId;
         }
 
-        //не анонимно
+        //Вставка причастных к происшествию не анонимно
         private void InsertInvolved()
         {
             connection.Open();
-            string SqlInsert = "Insert Into diploma_Involed ([id_incident], [id_person], [attitude]) " +
+            string SqlInsert = "Insert Into [diploma_Involved] ([id_incident], [id_person], [attitude]) " +
                 "Values ('" + GetIncidentId() + "', '" + GetPersonId() + "', 'Заявитель')";
             SqlCommand command = new SqlCommand(SqlInsert, connection);
-            command.ExecuteNonQuery();
+            connection.Open();
+            command.ExecuteNonQuery(); 
 
             connection.Close();
         }
 
-        //анонимно
+        //Вставка причастных к происшествию анонимно
         private void InsertInvolvedAnonym()
         {
             //аноним: | 4 | Аноним | - | - | - | 0 | 3 |
             connection.Open();
-            string SqlInsert = "Insert Into diploma_Involed ([id_incident], [id_person], [attitude]) " +
+            string SqlInsert = "Insert Into [diploma_Involved] ([id_incident], [id_person], [attitude]) " +
                 "Values ('"+GetIncidentId()+"', '4', 'Заявитель')";
             SqlCommand command = new SqlCommand(SqlInsert, connection);
+            connection.Open();
             command.ExecuteNonQuery();
 
             connection.Close();
         }
 
+        //
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtbx_city.Text == "" || txtbx_street.Text == "" ||
@@ -212,9 +231,9 @@ namespace diploma_app
         {
             Console.WriteLine(dtpckr_incident_date.Text);
 
-            Console.WriteLine(dtpckr_incident_date.Text.Remove(2)); //day
-            Console.WriteLine(dtpckr_incident_date.Text.Substring(3).Remove(2)); //month
-            Console.WriteLine(dtpckr_incident_date.Text.Substring(6)); //year
+            //Console.WriteLine(dtpckr_incident_date.Text.Remove(2)); //day
+            //Console.WriteLine(dtpckr_incident_date.Text.Substring(3).Remove(2)); //month
+            //Console.WriteLine(dtpckr_incident_date.Text.Substring(6)); //year
         }
     }
 }
