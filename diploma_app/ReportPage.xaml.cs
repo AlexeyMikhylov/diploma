@@ -40,6 +40,7 @@ namespace diploma_app
             // Добавим линию, и назначим ее в ранее созданную область "Default"
             chart.Series.Add(new Series("Series1"));
 
+            //we gotta send data from
             Incidents = new ObservableCollection<Incident>
             {
                 new Incident {Month = "Январь", NumberOfIncidents = 784},

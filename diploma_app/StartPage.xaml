@@ -53,7 +53,7 @@
                             </Button.Resources>
                         </Button>
 
-                        <Button Content="Лицо" Height="35" Margin="0,0,0,10" Grid.Row="1" Grid.Column="1" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
+                        <Button Content="Лицо" x:Name="btn_PersonCatalog" Click="btn_PersonCatalog_Click" Height="35" Margin="0,0,0,10" Grid.Row="1" Grid.Column="1" FontSize="16" Background="#1E90FF" Foreground="White" BorderBrush="Black">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5,0,0,5"/>
@@ -132,7 +132,7 @@
                         <RowDefinition Height="10*" MinHeight="200"/>
                     </Grid.RowDefinitions>
 
-                    <Button Content="+" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalContentAlignment="Center" Padding="0,0,0,0" Background="#008000" Foreground="White" BorderBrush="Black" Margin="0,2,5,0" >
+                    <Button Click="btn_IncidentAdd_Click" Content="+" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalContentAlignment="Center" Padding="0,0,0,0" Background="#008000" Foreground="White" BorderBrush="Black" Margin="0,2,5,0" >
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,0,0"/>
