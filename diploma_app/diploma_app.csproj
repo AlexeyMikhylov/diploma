@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPersonPage.xaml.cs">
+      <DependentUpon>AddPersonPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IncidentPage.xaml.cs">
       <DependentUpon>IncidentPage.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,10 @@
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Page Include="AddIncidentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPersonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,7 +9,19 @@
       Title="PersonPage" Loaded="Page_Loaded">
 
     <Grid Background="White">
-        <ListView x:Name="lstview_Persons" ItemsSource="{Binding Person}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="12*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="cmbbx_SortAttitude" SelectedIndex="0" Width="120" SelectionChanged="cmbbx_SortAttitude_SelectionChanged">
+                <ComboBoxItem Content="Заявитель"/>
+                <ComboBoxItem Content="Подозреваемый"/>
+            </ComboBox>
+        </StackPanel>
+
+        <ListView x:Name="lstview_Persons" Grid.Row="1" ItemsSource="{Binding Person}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="10" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical"/>

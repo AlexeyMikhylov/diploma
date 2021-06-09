@@ -118,5 +118,10 @@ namespace diploma_app
         {
             Manager.MainFrame.Navigate(new PersonPage());
         }
+
+        private void btn_PersonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddPersonPage());
+        }
     }
 }

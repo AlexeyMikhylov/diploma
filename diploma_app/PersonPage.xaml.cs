@@ -61,5 +61,10 @@ namespace diploma_app
         {
             FillListView();
         }
+
+        private void cmbbx_SortAttitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //FillListView();
+        }
     }
 }

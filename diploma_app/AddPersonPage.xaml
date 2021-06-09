@@ -1,0 +1,72 @@
+﻿<Page x:Class="diploma_app.AddPersonPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:diploma_app"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddPersonPage">
+
+    <Grid Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1*" MaxHeight="35" MinHeight="35"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Подозреваемый" Grid.Row="0" BorderBrush="Black">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <ComboBox x:Name="cmbbx_Incident" SelectedIndex="0" >
+                        <ComboBoxItem Content="Выберите происшествие" />
+                        <ComboBoxItem Content="Происшествие 1" />
+                        <ComboBoxItem Content="Происшествие 2" />
+                        <ComboBoxItem Content="Происшествие 3" />
+                    </ComboBox>
+                    <Label Content="Фамилия" />
+                    <TextBox x:Name="txtbx_last_name" />
+                    <Label Content="Имя" />
+                    <TextBox x:Name="txtbx_first_name" />
+                    <Label Content="Отчество" />
+                    <TextBox x:Name="txtbx_patronymic" />
+                    <Label Content="Адрес" />
+                    <TextBox x:Name="txtbx_registration_address" />
+                    <Label Content="Телефон" />
+                    <TextBox x:Name="txtbx_phone" />
+                    <Label Content="Гражданство" />
+                    <ComboBox x:Name="cmbbx_Citizenship" SelectedIndex="0" >
+                        <ComboBoxItem Content="Выберите" />
+                        <ComboBoxItem Content="Гражданин РФ" />
+                        <ComboBoxItem Content="Гражданин иностранного государства" />
+                        <ComboBoxItem Content="Нет гражданства" />
+                    </ComboBox>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btn_IncidentCancel" Content="Отмена" Grid.Column="0" BorderBrush="Black" Margin="5" Background="#FF0000" Foreground="White" Click="btn_IncidentCancel_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btn_IncidentAdd" Content="Отправить" Grid.Column="1" BorderBrush="Black" Margin="0,5,5,5" Background="#008000" Foreground="White" Click="btn_IncidentAdd_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </Grid>
+        
+    </Grid>
+</Page>
