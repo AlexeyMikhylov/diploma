@@ -66,7 +66,19 @@
         <GroupBox Header="Место происшествия" Grid.Row="1" Grid.Column="0" BorderBrush="Black">
             <StackPanel>
                 <Label Content="Город" />
-                <TextBox x:Name="txtbx_city" />
+                <ComboBox x:Name="cmbbx_city" SelectedIndex="0">
+                    <ComboBoxItem Content="Ярославль"/>
+                    <ComboBoxItem Content="Гаврилов-Ям"/>
+                    <ComboBoxItem Content="Данилов"/>
+                    <ComboBoxItem Content="Любим"/>
+                    <ComboBoxItem Content="Мышкин"/>
+                    <ComboBoxItem Content="Переславль-Залесский"/>
+                    <ComboBoxItem Content="Пошехонье"/>
+                    <ComboBoxItem Content="Ростов"/>
+                    <ComboBoxItem Content="Рыбинск"/>
+                    <ComboBoxItem Content="Тутаев"/>
+                    <ComboBoxItem Content="Углич"/>
+                </ComboBox>
                 <Label Content="Улица" />
                 <TextBox x:Name="txtbx_street" />
                 <Label Content="Дом" />
@@ -78,7 +90,11 @@
 
         <GroupBox Header="О заявителе" Grid.RowSpan="2" Grid.Column="1" BorderBrush="Black">
             <StackPanel>
-                <RadioButton x:Name="rdbtn_anonym" Content="Аноним" VerticalContentAlignment="Center" Checked="rdbtn_anonym_Checked" />
+
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="rdbtn_nonanonym" Content="Не анонимно" VerticalContentAlignment="Center" Margin="0,0,5,0" Checked="rdbtn_nonanonym_Checked"/>
+                    <RadioButton x:Name="rdbtn_anonym" Content="Анонимно" VerticalContentAlignment="Center" Checked="rdbtn_anonym_Checked" Click="rdbtn_anonym_Click"  />
+                </StackPanel>
                 <Label Content="Фамилия" />
                 <TextBox x:Name="txtbx_last_name" />
                 <Label Content="Имя" />

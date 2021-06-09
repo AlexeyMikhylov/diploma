@@ -13,8 +13,39 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="12*" />
+        </Grid.RowDefinitions>
 
-        <ListView x:Name="lstview_Incidents" ItemsSource="{Binding Incidents}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="10" >
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="txtbx_IncidentSearch" Width="180" />
+            <ComboBox x:Name="cmbbx_IncidentFilterCity" SelectedIndex="0" Width="180">
+                <ComboBoxItem Content="Область" />
+                <ComboBoxItem Content="Ярославль"/>
+                <ComboBoxItem Content="Гаврилов-Ям"/>
+                <ComboBoxItem Content="Данилов"/>
+                <ComboBoxItem Content="Любим"/>
+                <ComboBoxItem Content="Мышкин"/>
+                <ComboBoxItem Content="Переславль-Залесский"/>
+                <ComboBoxItem Content="Пошехонье"/>
+                <ComboBoxItem Content="Ростов"/>
+                <ComboBoxItem Content="Рыбинск"/>
+                <ComboBoxItem Content="Тутаев"/>
+                <ComboBoxItem Content="Углич"/>
+            </ComboBox>
+            <ComboBox x:Name="cmbbx_IncidentFilterStatus" SelectedIndex="0" Width="180">
+                <ComboBoxItem Content="Статус (любой)" />
+                <ComboBoxItem Content="На рассмотрении" />
+                <ComboBoxItem Content="Ведется решение" />
+                <ComboBoxItem Content="Возбуждение уголовного дела" />
+                <ComboBoxItem Content="Отказ" />
+            </ComboBox>
+            <DatePicker x:Name="dtpcr_IncidentFilterDate" Text="Выберите дату"/>
+            <Button x:Name="btn_IncidentFilterSet" Content="✔" Width="30"/>
+        </StackPanel>
+        
+        <ListView x:Name="lstview_Incidents" Grid.Row="1" ItemsSource="{Binding Incidents}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="10" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical"/>
@@ -32,7 +63,8 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0">
-                            <TextBlock Name="line" TextWrapping="WrapWithOverflow" Text="---------------------------------------------"/>
+                            <TextBlock Name="line" TextWrapping="WrapWithOverflow" 
+                                       Text="-------------------------------------------------------------------------------------"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="1">
@@ -42,7 +74,8 @@
 
                         <StackPanel Orientation="Horizontal" Grid.Row="2">
                             <TextBlock Name="IncidentType" TextWrapping="WrapWithOverflow" Text="{Binding incident_type, StringFormat=' {0},'}"/>
-                            <TextBlock Name="FixationForm" TextWrapping="WrapWithOverflow" Text="{Binding fixation_form, StringFormat=' {0}'}"/>
+                            <TextBlock Name="FixationForm" TextWrapping="WrapWithOverflow" Text="{Binding fixation_form, StringFormat=' {0},'}"/>
+                            <TextBlock Name="Status" TextWrapping="WrapWithOverflow" Text="{Binding incident_status, StringFormat=' {0}'}"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="3">
@@ -53,21 +86,13 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Grid.Row="4">
-                            <TextBlock Name="Man" TextWrapping="WrapWithOverflow" Text="Заявитель: "/>
+                            <TextBlock Name="Man" TextWrapping="WrapWithOverflow" Text=" Заявитель: "/>
                             <TextBlock Name="LastName" TextWrapping="WrapWithOverflow" Text="{Binding last_name, StringFormat=' {0}'}"/>
                             <TextBlock Name="FisrtName" TextWrapping="WrapWithOverflow" Text="{Binding first_name, StringFormat=' {0}'}"/>
                             <TextBlock Name="Patronymic" TextWrapping="WrapWithOverflow" Text="{Binding patronymic, StringFormat=' {0},'}"/>
                             <TextBlock Name="Citizenship" TextWrapping="WrapWithOverflow" Text="{Binding citizenship, StringFormat=' {0},'}"/>
                             <TextBlock Name="Address" TextWrapping="WrapWithOverflow" Text="{Binding attitude, StringFormat=' {0}'}"/>
                         </StackPanel>
-                        
-                        <!--
-                        <TextBlock Name="user" TextWrapping="WrapWithOverflow" Grid.Row="0" Grid.Column="0" Text="{Binding Заказчик, StringFormat='Заказчик: {0}'}"/>
-                        <TextBlock Name="Date" TextWrapping="WrapWithOverflow" Grid.Row="1" Grid.Column="0" Text="{Binding Дата, StringFormat='Дата: {0}'}"/>
-                        <TextBlock Name="orderNumber" TextWrapping="WrapWithOverflow" Grid.Row="2" Grid.Column="0" Text="{Binding [Номер заказа], StringFormat='Номер заказа: {0}'}"/>
-                        <TextBlock Name="orderStatus" TextWrapping="WrapWithOverflow" Grid.Row="2" Grid.Column="1" Text="{Binding [Статус], StringFormat='Статус заказа: {0}'}"/>
-                        -->
-                        
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

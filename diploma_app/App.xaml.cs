@@ -14,9 +14,9 @@ namespace diploma_app
     public partial class App : Application
     {
         //home
-        public static string ConnectionString = @"Data Source=LAPTOP-R79E5F1S\SQLEXPRESS;Initial Catalog=diploma_IncidentsRegistration;Integrated Security=True";
+        //public static string ConnectionString = @"Data Source=LAPTOP-R79E5F1S\SQLEXPRESS;Initial Catalog=diploma_IncidentsRegistration;Integrated Security=True";
 
         //college
-        //public static string ConnectionString = "";
+        public static string ConnectionString = "Data Source=stud-mssql.sttec.yar.ru,38325;Initial Catalog=user53_db;User ID=user53_db;Password=user53";
     }
 }

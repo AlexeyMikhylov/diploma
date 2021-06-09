@@ -33,7 +33,7 @@ namespace diploma_app
         {            
             connection.Open();
             string SqlInsert = "Insert Into diploma_IncidentAddress (city, street, building, comment) " +
-                "Values ('" + txtbx_city.Text + "', '" + txtbx_street.Text + "', " +
+                "Values ('" + cmbbx_city.Text + "', '" + txtbx_street.Text + "', " +
                 "'" + txtbx_building.Text + "', '" + txtbx_comment.Text + "')";
 
             SqlCommand command = new SqlCommand(SqlInsert, connection);
@@ -48,7 +48,7 @@ namespace diploma_app
             connection.Close();
             connection.Open();
             string SqlSelect = "Select id_incident_address From diploma_IncidentAddress " +
-                "Where city = '" + txtbx_city.Text + "' and street = '" + txtbx_street.Text + "' " +
+                "Where city = '" + cmbbx_city.Text + "' and street = '" + txtbx_street.Text + "' " +
                 "and building = '" + txtbx_building.Text + "' and comment = '" + txtbx_comment.Text + "'";
             SqlCommand command = new SqlCommand(SqlSelect, connection);
 
@@ -167,7 +167,6 @@ namespace diploma_app
         //Вставка причастных к происшествию анонимно
         private void InsertInvolvedAnonym()
         {
-            //аноним: | 4 | Аноним | - | - | - | 0 | 3 |
             connection.Open();
             string SqlInsert = "Insert Into [diploma_Involved] ([id_incident], [id_person], [attitude]) " +
                 "Values ('"+GetIncidentId()+"', '4', 'Заявитель')";
@@ -178,10 +177,23 @@ namespace diploma_app
             connection.Close();
         }
 
+        //Вставка в постановление
+        private void InsertIntoDecree()
+        {
+            connection.Open();
+            string SqlInsert = "Insert Into [diploma_Decree] ([decree_date], [id_incident]) " +
+                "Values ('"+DateTime.Now+"', '"+GetIncidentId()+"')";
+            SqlCommand command = new SqlCommand(SqlInsert, connection);
+            connection.Open();
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+
         //сок
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (txtbx_city.Text == "" || txtbx_street.Text == "" ||
+            if (cmbbx_city.Text == "" || txtbx_street.Text == "" ||
                 txtbx_building.Text == "" || txtbx_comment.Text == "" ||
                 txtbx_last_name.Text == "" || txtbx_first_name.Text == "" ||
                 txtbx_patronymic.Text == "" || txtbx_registration_address.Text == "" ||
@@ -201,6 +213,8 @@ namespace diploma_app
                 }
                 //вставка происшествия
                 InsertIncident();
+                //Вставка постановления
+                InsertIntoDecree();
                 //вставка лица
                 if (GetPersonId() == "" || GetPersonId() == null)
                 {
@@ -239,6 +253,30 @@ namespace diploma_app
         private void btn_IncidentCancel_Click(object sender, RoutedEventArgs e)
         {
             //клин энд клир эврисынг
+        }
+
+        private void rdbtn_anonym_Click(object sender, RoutedEventArgs e)
+        {
+            rdbtn_nonanonym.IsChecked = false;
+
+            txtbx_last_name.IsEnabled = false;
+            txtbx_first_name.IsEnabled = false;
+            txtbx_patronymic.IsEnabled = false;
+            txtbx_phone.IsEnabled = false;
+            txtbx_registration_address.IsEnabled = false;
+            cmbbx_Citizenship.IsEnabled = false;
+        }
+
+        private void rdbtn_nonanonym_Checked(object sender, RoutedEventArgs e)
+        {
+            rdbtn_anonym.IsChecked = false;
+
+            txtbx_last_name.IsEnabled = true;
+            txtbx_first_name.IsEnabled = true;
+            txtbx_patronymic.IsEnabled = true;
+            txtbx_phone.IsEnabled = true;
+            txtbx_registration_address.IsEnabled = true;
+            cmbbx_Citizenship.IsEnabled = true;
         }
     }
 }

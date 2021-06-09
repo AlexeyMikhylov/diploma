@@ -40,7 +40,7 @@ namespace diploma_app
                 "[diploma_IncidentType].incident_type, [diploma_FixationForm].fixation_form, " +
                 "[diploma_Person].last_name, [diploma_Person].first_name, " +
                 "[diploma_Person].patronymic, [diploma_Citizenship].citizenship, " +
-                "[diploma_Involved].attitude " +
+                "[diploma_Involved].attitude, [diploma_IncidentStatus].[incident_status] " +
                 "From[diploma_KRSP] join[diploma_IncidentAddress] " +
                 "on[diploma_KRSP].id_incident_address = [diploma_IncidentAddress].id_incident_address" +
                 " join[diploma_IncidentType] on [diploma_KRSP].id_incident_type = [diploma_IncidentType].id_incident_type " +
@@ -48,6 +48,8 @@ namespace diploma_app
                 " join[diploma_Involved] on[diploma_KRSP].id_incident = [diploma_Involved].id_incident" +
                 " join[diploma_Person] on[diploma_Involved].id_person = [diploma_Person].id_person" +
                 " join[diploma_Citizenship] on[diploma_Person].id_citizenship = [diploma_Citizenship].id_citizenship" +
+                " join [diploma_Decree] on [diploma_KRSP].[id_incident] = [diploma_Decree].[id_incident]" +
+                " join [diploma_IncidentStatus] on [diploma_Decree].[id_incidentstatus] = [diploma_IncidentStatus].[id_incidentstatus] " +
                 " order by [incident_date] desc";
             SqlCommand command = new SqlCommand(sqlSelectQuery, connection);
             adapter = new SqlDataAdapter(command);
