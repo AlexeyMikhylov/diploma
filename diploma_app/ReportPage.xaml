@@ -17,15 +17,24 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="С" Margin="5" VerticalAlignment="Center" />
-            <ComboBox x:Name="cmbbx_1" SelectionChanged="cmbbx_2_SelectionChanged" SelectedIndex="0" Width="150" Margin="5" DisplayMemberPath="Path1" />
+            <DatePicker x:Name="dtpckr_from" VerticalContentAlignment="Center"/>
             <Label Content="По" Margin="5" VerticalAlignment="Center" />
+            <DatePicker x:Name="dtpckr_to" VerticalContentAlignment="Center"/>
+            <Label Content="Вид графика:" Margin="5" VerticalAlignment="Center" />
             <ComboBox x:Name="cmbbx_2" SelectionChanged="cmbbx_2_SelectionChanged" SelectedIndex="0" Width="150" Margin="5" >
             </ComboBox>
+            <Button x:Name="btn_PrintReport" Content="🖨" Click="btn_PrintReport_Click" Height="25" Width="30" Background="White" BorderBrush="Black" Foreground="Black">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
 
-        <WindowsFormsHost Grid.Row="1" Margin="5">
+        <WindowsFormsHost x:Name="WinFormsHost" Grid.Row="1" Margin="5">
             <charts:Chart x:Name="chart">
                 <charts:Chart.Legends>
                     <charts:Legend>

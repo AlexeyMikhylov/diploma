@@ -18,5 +18,7 @@ namespace diploma_app
 
         //college
         public static string ConnectionString = "Data Source=stud-mssql.sttec.yar.ru,38325;Initial Catalog=user53_db;User ID=user53_db;Password=user53";
+
+        public static int CurrentUserId = 0;
     }
 }

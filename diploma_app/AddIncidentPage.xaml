@@ -93,7 +93,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <RadioButton x:Name="rdbtn_nonanonym" Content="Не анонимно" VerticalContentAlignment="Center" Margin="0,0,5,0" Checked="rdbtn_nonanonym_Checked"/>
-                    <RadioButton x:Name="rdbtn_anonym" Content="Анонимно" VerticalContentAlignment="Center" Checked="rdbtn_anonym_Checked" Click="rdbtn_anonym_Click"  />
+                    <RadioButton x:Name="rdbtn_anonym" Content="Анонимно" VerticalContentAlignment="Center" Checked="rdbtn_anonym_Checked" />
                 </StackPanel>
                 <Label Content="Фамилия" />
                 <TextBox x:Name="txtbx_last_name" />
@@ -129,7 +129,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="btn_PersonAdd" Content="Отправить и добавить лицо" Grid.Column="1" BorderBrush="Black" Margin="5" Background="#1E90FF" Foreground="White">
+            <Button x:Name="btn_PersonAdd" Content="Отправить и добавить лицо" Grid.Column="1" BorderBrush="Black" Margin="5" Background="#1E90FF" Foreground="White" Click="btn_PersonAdd_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

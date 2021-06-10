@@ -19,8 +19,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="txtbx_IncidentSearch" Width="180" />
-            <ComboBox x:Name="cmbbx_IncidentFilterCity" SelectedIndex="0" Width="180">
+            <TextBox x:Name="txtbx_IncidentSearch" Width="180" TextChanged="txtbx_IncidentSearch_TextChanged"/>
+            <ComboBox x:Name="cmbbx_IncidentFilterCity" SelectedIndex="0" Width="180" SelectionChanged="cmbbx_IncidentFilterCity_SelectionChanged">
+                <ComboBoxItem Content="Город" />
                 <ComboBoxItem Content="Область" />
                 <ComboBoxItem Content="Ярославль"/>
                 <ComboBoxItem Content="Гаврилов-Ям"/>
@@ -34,18 +35,19 @@
                 <ComboBoxItem Content="Тутаев"/>
                 <ComboBoxItem Content="Углич"/>
             </ComboBox>
-            <ComboBox x:Name="cmbbx_IncidentFilterStatus" SelectedIndex="0" Width="180">
-                <ComboBoxItem Content="Статус (любой)" />
+            <ComboBox x:Name="cmbbx_IncidentFilterStatus" SelectedIndex="0" Width="180" SelectionChanged="cmbbx_IncidentFilterStatus_SelectionChanged">
+                <ComboBoxItem Content="Статус" />
+                <ComboBoxItem Content="Все" />
                 <ComboBoxItem Content="На рассмотрении" />
                 <ComboBoxItem Content="Ведется решение" />
                 <ComboBoxItem Content="Возбуждение уголовного дела" />
                 <ComboBoxItem Content="Отказ" />
             </ComboBox>
-            <DatePicker x:Name="dtpcr_IncidentFilterDate" Text="Выберите дату"/>
-            <Button x:Name="btn_IncidentFilterSet" Content="✔" Width="30"/>
+            <DatePicker x:Name="dtpcr_IncidentFilterDate" Text="Выберите дату" CalendarClosed="dtpcr_IncidentFilterDate_CalendarClosed" />
+            <Button x:Name="btn_IncidentFilterDateCancel" Content="❌🗓" Width="45" Click="btn_IncidentFilterDateCancel_Click"/>
         </StackPanel>
         
-        <ListView x:Name="lstview_Incidents" Grid.Row="1" ItemsSource="{Binding Incidents}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="10" >
+        <ListView x:Name="lstview_Incidents" Grid.Row="1" ItemsSource="{Binding Incidents}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Margin="10" PreviewMouseLeftButtonUp="lstview_Incidents_PreviewMouseLeftButtonUp">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical"/>

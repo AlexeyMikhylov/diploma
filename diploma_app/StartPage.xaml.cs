@@ -83,6 +83,13 @@ namespace diploma_app
             //return number
         }
 
+        private void CountIncidentsWeek()
+        {
+            // to do sql query
+
+            //return numbers
+        }
+
         private void DateFormat()
         {
             ((DataGridTextColumn)dtgrid_incidents.Columns[0]).Binding.StringFormat = "dd.MM.yyyy HH:mm";

@@ -66,5 +66,25 @@ namespace diploma_app
         {
             //FillListView();
         }
+
+        private void cmbbx_SortSitizenship_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void txtbx_PersonSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void cmbbx_IncidentFilterCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cmbbx_PersonSearchby_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

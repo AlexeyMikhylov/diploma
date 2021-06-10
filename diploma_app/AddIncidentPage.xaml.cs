@@ -236,11 +236,6 @@ namespace diploma_app
             }
         }
 
-        private void rdbtn_anonym_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void dtpckr_incident_date_CalendarClosed(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(dtpckr_incident_date.Text);
@@ -255,7 +250,20 @@ namespace diploma_app
             //клин энд клир эврисынг
         }
 
-        private void rdbtn_anonym_Click(object sender, RoutedEventArgs e)
+        //Анонимная заявка
+        //private void rdbtn_anonym_Click(object sender, RoutedEventArgs e)
+        //{
+        //    rdbtn_nonanonym.IsChecked = false;
+
+        //    txtbx_last_name.IsEnabled = false;
+        //    txtbx_first_name.IsEnabled = false;
+        //    txtbx_patronymic.IsEnabled = false;
+        //    txtbx_phone.IsEnabled = false;
+        //    txtbx_registration_address.IsEnabled = false;
+        //    cmbbx_Citizenship.IsEnabled = false;
+        //}
+
+        private void rdbtn_anonym_Checked(object sender, RoutedEventArgs e)
         {
             rdbtn_nonanonym.IsChecked = false;
 
@@ -277,6 +285,13 @@ namespace diploma_app
             txtbx_phone.IsEnabled = true;
             txtbx_registration_address.IsEnabled = true;
             cmbbx_Citizenship.IsEnabled = true;
+        }
+
+        //Добавление происшествия и переход на окно добавление подозреваемого
+        private void btn_PersonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            btn_IncidentAdd_Click(sender, e);
+            Manager.MainFrame.Navigate(new AddPersonPage());
         }
     }
 }

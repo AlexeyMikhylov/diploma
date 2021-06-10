@@ -49,7 +49,8 @@ namespace diploma_app
             SqlConnection connection = new SqlConnection(App.ConnectionString);
             connection.Open();
 
-            string SqlSelect = "Select login, password, role From diploma_user " +
+            string SqlSelect = "Select login, password, role, [last_name], [first_name], [id_official] " +
+                "From [diploma_Official] " +
                 "Where login = '" + txtbx_login.Text + "' and password = '" + pswrdbx_password.Password + "'";
             SqlCommand command = new SqlCommand(SqlSelect, connection);
 
@@ -57,12 +58,16 @@ namespace diploma_app
             string login = "";
             string password = "";
             string role = "";
+            string name = "";
+            int id = 0;
 
             while (dataReader.Read())
             {
                 login = dataReader.GetString(0);
                 password = dataReader.GetString(1);
                 role = dataReader.GetString(2);
+                name = dataReader.GetString(3) + " " + dataReader.GetString(4);
+                id = dataReader.GetInt32(5);
             }
 
             if (login == "" || password == "")
@@ -73,7 +78,8 @@ namespace diploma_app
             {
                 if (role == "user")
                 {
-                    MainPageWindow MPW = new MainPageWindow(login);
+                    App.CurrentUserId = id;
+                    MainPageWindow MPW = new MainPageWindow(name);
                     MPW.Show();
                     Close();
                 }

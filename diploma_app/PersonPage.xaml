@@ -14,10 +14,39 @@
             <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox x:Name="cmbbx_SortAttitude" SelectedIndex="0" Width="120" SelectionChanged="cmbbx_SortAttitude_SelectionChanged">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <ComboBox x:Name="cmbbx_PersonSearchby" SelectedIndex="0" Width="75" SelectionChanged="cmbbx_PersonSearchby_SelectionChanged">
+                <ComboBoxItem Content="Поиск" />
+                <ComboBoxItem Content="ФИО" />
+                <ComboBoxItem Content="Телефон"/>
+                <ComboBoxItem Content="Адрес"/>
+            </ComboBox>
+            <TextBox x:Name="txtbx_PersonSearch" Width="160" TextChanged="txtbx_PersonSearch_TextChanged"/>
+            <ComboBox x:Name="cmbbx_IncidentFilterCity" SelectedIndex="0" Width="140" SelectionChanged="cmbbx_IncidentFilterCity_SelectionChanged">
+                <ComboBoxItem Content="Город" />
+                <ComboBoxItem Content="Область" />
+                <ComboBoxItem Content="Ярославль"/>
+                <ComboBoxItem Content="Гаврилов-Ям"/>
+                <ComboBoxItem Content="Данилов"/>
+                <ComboBoxItem Content="Любим"/>
+                <ComboBoxItem Content="Мышкин"/>
+                <ComboBoxItem Content="Переславль-Залесский"/>
+                <ComboBoxItem Content="Пошехонье"/>
+                <ComboBoxItem Content="Ростов"/>
+                <ComboBoxItem Content="Рыбинск"/>
+                <ComboBoxItem Content="Тутаев"/>
+                <ComboBoxItem Content="Углич"/>
+            </ComboBox>
+            <ComboBox x:Name="cmbbx_SortAttitude" SelectedIndex="0" Width="110" SelectionChanged="cmbbx_SortAttitude_SelectionChanged">
+                <ComboBoxItem Content="Отношение"/>
                 <ComboBoxItem Content="Заявитель"/>
                 <ComboBoxItem Content="Подозреваемый"/>
+            </ComboBox>
+            <ComboBox x:Name="cmbbx_SortSitizenship" SelectedIndex="0" Width="230" SelectionChanged="cmbbx_SortSitizenship_SelectionChanged">
+                <ComboBoxItem Content="Гражданство"/>
+                <ComboBoxItem Content="Гражданин РФ"/>
+                <ComboBoxItem Content="Гражданин иностранного государства"/>
+                <ComboBoxItem Content="нет гражданства"/>
             </ComboBox>
         </StackPanel>
 

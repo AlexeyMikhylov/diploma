@@ -60,7 +60,7 @@ namespace diploma_app
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //chart.ChartAreas.Add(new ChartArea("Main"));
-            cmbbx_1.ItemsSource = Incidents;
+            //cmbbx_1.ItemsSource = Incidents;
             cmbbx_2.ItemsSource = Enum.GetValues(typeof(SeriesChartType));
 
             chart.Series["Series1"].ChartArea = "Default";
@@ -76,6 +76,16 @@ namespace diploma_app
 
         private void cmbbx_2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void btn_PrintReport_Click(object sender, RoutedEventArgs e)
+        {
+            //Печать
+            PrintDialog pd = new PrintDialog();
+            if (pd.ShowDialog() == true)
+            {
+                pd.PrintVisual(WinFormsHost, "Печать отчета...");
+            }
         }
     }
 }
