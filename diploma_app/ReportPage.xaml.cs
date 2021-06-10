@@ -87,5 +87,10 @@ namespace diploma_app
                 pd.PrintVisual(WinFormsHost, "Печать отчета...");
             }
         }
+
+        private void cmbbx_ReportCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

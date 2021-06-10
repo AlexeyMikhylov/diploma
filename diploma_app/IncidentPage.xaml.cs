@@ -136,10 +136,10 @@ namespace diploma_app
                 "where [id_incident] = "+id+ " and id_official = "+App.CurrentUserId+"";
             SqlCommand com = new SqlCommand(SqlInsert, connection);
 
-            Console.WriteLine(com.ExecuteNonQuery());
-            Console.WriteLine(com.ExecuteScalar().ToString());
+            //Console.WriteLine(com.ExecuteNonQuery());
+            //Console.WriteLine(com.ExecuteScalar().ToString());
 
-            if (com.ExecuteNonQuery() == -1 && com.ExecuteScalar().ToString() == "")
+            if (com.ExecuteNonQuery() == -1 && com.ExecuteScalar().ToString() == "") //
             {
                 result = "null";
             }

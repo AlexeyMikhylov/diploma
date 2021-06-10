@@ -25,6 +25,10 @@ namespace diploma_app
         SqlDataAdapter adapter;
         DataTable Person;
         SqlConnection connection = new SqlConnection(App.ConnectionString);
+        string whereCity = "";
+        string whereAttitude = "";
+        string whereSitizenship = "";
+        string whereSearch = "Where [last_name] like '%%' ";
         public PersonPage()
         {
             InitializeComponent();
@@ -48,6 +52,7 @@ namespace diploma_app
                 "on diploma_Person.id_person = diploma_Involved.id_person " +
                 "join diploma_KRSP " +
                 "on diploma_Involved.id_incident = diploma_KRSP.id_incident " +
+                ""+whereSearch+" "+whereCity+" "+whereAttitude+" "+whereSitizenship+" " +
                 "order by incident_date desc";
             SqlCommand command = new SqlCommand(sqlSelectQuery, connection);
             adapter = new SqlDataAdapter(command);
@@ -69,7 +74,19 @@ namespace diploma_app
 
         private void cmbbx_SortSitizenship_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (cmbbx_SortSitizenship.SelectedIndex != 0)
+            {
+                if (cmbbx_SortSitizenship.SelectedIndex == 1)
+                {
+                    whereSitizenship = "";
+                    FillListView();
+                }
+                else
+                {
+                    //whereSitizenship = " and citizenship = '"+cmb+"'";
+                    FillListView();
+                }
+            }
         }
 
         private void txtbx_PersonSearch_TextChanged(object sender, TextChangedEventArgs e)

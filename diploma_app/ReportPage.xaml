@@ -18,10 +18,25 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="cmbbx_ReportCity" SelectedIndex="0" Height="25" Width="180" SelectionChanged="cmbbx_ReportCity_SelectionChanged" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Город" />
+                <ComboBoxItem Content="Область" />
+                <ComboBoxItem Content="Ярославль"/>
+                <ComboBoxItem Content="Гаврилов-Ям"/>
+                <ComboBoxItem Content="Данилов"/>
+                <ComboBoxItem Content="Любим"/>
+                <ComboBoxItem Content="Мышкин"/>
+                <ComboBoxItem Content="Переславль-Залесский"/>
+                <ComboBoxItem Content="Пошехонье"/>
+                <ComboBoxItem Content="Ростов"/>
+                <ComboBoxItem Content="Рыбинск"/>
+                <ComboBoxItem Content="Тутаев"/>
+                <ComboBoxItem Content="Углич"/>
+            </ComboBox>
             <Label Content="С" Margin="5" VerticalAlignment="Center" />
-            <DatePicker x:Name="dtpckr_from" VerticalContentAlignment="Center"/>
+            <DatePicker x:Name="dtpckr_from" VerticalContentAlignment="Center" Height="25" />
             <Label Content="По" Margin="5" VerticalAlignment="Center" />
-            <DatePicker x:Name="dtpckr_to" VerticalContentAlignment="Center"/>
+            <DatePicker x:Name="dtpckr_to" VerticalContentAlignment="Center" Height="25" />
             <Label Content="Вид графика:" Margin="5" VerticalAlignment="Center" />
             <ComboBox x:Name="cmbbx_2" SelectionChanged="cmbbx_2_SelectionChanged" SelectedIndex="0" Width="150" Margin="5" >
             </ComboBox>
