@@ -37,7 +37,8 @@ namespace diploma_app
         private void FillListView()
         {
             connection.Open();
-            string sqlSelectQuery = "Select [last_name], [first_name], [patronymic], " +
+            string sqlSelectQuery = "Select [diploma_Person].[id_person], " +
+                "[last_name], [first_name], [patronymic], " +
                 "[registration_address], [phone], [diploma_Citizenship].citizenship, " +
                 "[diploma_CriminalRecord].criminal_record, diploma_Involved.attitude, " +
                 "diploma_KRSP.incident_date, diploma_KRSP.summary " +
@@ -67,11 +68,25 @@ namespace diploma_app
             FillListView();
         }
 
+        //фильтр по отношению к происшествию
         private void cmbbx_SortAttitude_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //FillListView();
+            if (cmbbx_SortAttitude.SelectedIndex != 0)
+            {
+                if (cmbbx_SortAttitude.SelectedIndex == 1)
+                {
+                    whereAttitude = "";
+                    FillListView();
+                }
+                else
+                {
+                    whereAttitude = " and attitude = '" + cmbbx_SortAttitude.SelectedValue.ToString().Substring(38) + "'";
+                    FillListView();
+                }
+            }
         }
 
+        //фильтр по гражданству
         private void cmbbx_SortSitizenship_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbbx_SortSitizenship.SelectedIndex != 0)
@@ -83,25 +98,69 @@ namespace diploma_app
                 }
                 else
                 {
-                    //whereSitizenship = " and citizenship = '"+cmb+"'";
+                    whereSitizenship = " and citizenship = '"+cmbbx_SortSitizenship.SelectedValue.ToString().Substring(38) + "'";
                     FillListView();
                 }
             }
         }
 
-        private void txtbx_PersonSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        //фильтр городу
         private void cmbbx_IncidentFilterCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (cmbbx_IncidentFilterCity.SelectedIndex != 0)
+            {
+                if (cmbbx_IncidentFilterCity.SelectedIndex == 1)
+                {
+                    whereCity = "";
+                    FillListView();
+                }
+                else
+                {
+                    whereCity = " and registration_address like " +
+                        "'%" + cmbbx_IncidentFilterCity.SelectedValue.ToString().Substring(38) + "%'";
+                    FillListView();
+                }
+            }
         }
 
-        private void cmbbx_PersonSearchby_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //поиск по ФИО, телефону, адресу
+        private void txtbx_PersonSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (cmbbx_PersonSearchby.SelectedIndex != 0)
+            {
+                if (cmbbx_PersonSearchby.SelectedIndex == 1)
+                {
+                    whereSearch = "Where [last_name] like '%" + txtbx_PersonSearch.Text + "%' " +
+                        "or [first_name] like '%" + txtbx_PersonSearch.Text + "%' " +
+                        "or [patronymic] like '%" + txtbx_PersonSearch.Text + "%' ";
+                    FillListView();
+                }
+                else if (cmbbx_PersonSearchby.SelectedIndex == 2)
+                {
+                    whereSearch = "Where [phone] like '%" + txtbx_PersonSearch.Text + "%' ";
+                    FillListView();
+                }
+                else
+                {
+                    whereSearch = "Where [registration_address] like '%" + txtbx_PersonSearch.Text + "%' ";
+                    FillListView();
+                }
+            }
+        }
 
+        //Клик по ListView
+        private void lstview_Persons_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if ((DataRowView)lstview_Persons.SelectedItem == null)
+            {
+                return;
+            }
+
+            DataRowView drv = (DataRowView)lstview_Persons.SelectedItem;
+            string personID = drv["id_person"].ToString();
+
+            PersonInfoWindow PIW = new PersonInfoWindow(personID);
+            PIW.ShowDialog();
         }
     }
 }

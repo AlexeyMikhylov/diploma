@@ -69,6 +69,9 @@
     <Compile Include="IncidentPage.xaml.cs">
       <DependentUpon>IncidentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PersonInfoWindow.xaml.cs">
+      <DependentUpon>PersonInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PersonPage.xaml.cs">
       <DependentUpon>PersonPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainPageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

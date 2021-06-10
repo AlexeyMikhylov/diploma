@@ -36,10 +36,14 @@ namespace diploma_app
         private void FillDataGrid(string id)
         {
             connection.Open();
-            string sqlSelectQuery = "Select diploma_KRSP.[id_incident], [incident_date] ,[summary], [incident_status] " +
+
+            string sqlSelectQuery = "Select diploma_KRSP.[id_incident], [incident_date], " +
+                "[summary], [incident_status], diploma_Official.last_name, diploma_Official.first_name " +
                 "From diploma_KRSP join diploma_Decree on diploma_KRSP.id_incident = diploma_Decree.id_incident " +
                 "join diploma_IncidentStatus on diploma_Decree.id_incidentstatus = diploma_IncidentStatus.id_incidentstatus " +
-                "Where diploma_KRSP.[id_incident] = "+ id + " and [id_official] = " + App.CurrentUserId + "";
+                "join diploma_Official on diploma_Decree.id_official = diploma_Official.id_official " +
+                "Where diploma_KRSP.[id_incident] = "+id+"";
+
             SqlCommand command = new SqlCommand(sqlSelectQuery, connection);
             adapter = new SqlDataAdapter(command);
             Incidents = new DataTable();

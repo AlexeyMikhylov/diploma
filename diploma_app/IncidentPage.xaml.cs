@@ -40,7 +40,7 @@ namespace diploma_app
         private void FillListView()
         {
             connection.Open();
-            string sqlSelectQuery = "Select [diploma_KRSP].[id_incident], [incident_date], [summary], " +
+            string sqlSelectQuery = "Select distinct [diploma_KRSP].[id_incident], [incident_date], [summary], " +
                 "[diploma_IncidentAddress].city, [diploma_IncidentAddress].street, " +
                 "[diploma_IncidentAddress].building, [diploma_IncidentAddress].comment, " +
                 "[diploma_IncidentType].incident_type, [diploma_FixationForm].fixation_form, " +
@@ -137,23 +137,38 @@ namespace diploma_app
         //Есть ли уже должностное лицо связанное с происшествием?
         private string CheckIfDecreeHadOfficial(string id)
         {
-            string result;
-            connection.Open();
-            string SqlInsert = "Select [id_official] From [diploma_Decree] " +
-                "where [id_incident] = "+id+ " and id_official = "+App.CurrentUserId+"";
-            SqlCommand com = new SqlCommand(SqlInsert, connection);
+            string result = "";
 
-            if (com.ExecuteScalar() == null )
+            connection.Open();
+
+            string SqlSelCurrent = "Select [id_official] From [diploma_Decree] " +
+                "where [id_incident] = "+id+ " and id_official = "+App.CurrentUserId+"";
+
+            string SqlSelAll = "Select [id_official] From [diploma_Decree] " +
+                "where [id_incident] = " + id + " ";
+
+            SqlCommand comCurrent = new SqlCommand(SqlSelCurrent, connection);
+            SqlCommand comAll = new SqlCommand(SqlSelAll, connection);
+
+            Console.WriteLine(comCurrent.ExecuteScalar());
+            Console.WriteLine(comAll.ExecuteScalar());
+
+            if (comAll.ExecuteScalar() == null) //Если нет вообще
             {
                 result = "null";
             }
-            else if (com.ExecuteNonQuery() == -1 && com.ExecuteScalar().ToString() == "")
+            else if (comCurrent.ExecuteScalar() == null) //если нет с id как у текущего пользователя
             {
-                result = "null";
+                result = "0";
+            }
+            else if (comCurrent.ExecuteNonQuery() == -1 
+                && comCurrent.ExecuteScalar().ToString() == "") 
+            {
+                result = "0";
             }
             else
             {
-                result = com.ExecuteScalar().ToString();
+                result = "1";
             }
             connection.Close();
 
@@ -175,19 +190,20 @@ namespace diploma_app
             string incidentDate = drv["incident_date"].ToString();
             string incidentSummary = drv["summary"].ToString();
 
-            if (CheckIfDecreeHadOfficial(incidentId) == "null" || CheckIfDecreeHadOfficial(incidentId) != App.CurrentUserId.ToString())
+            string offical = CheckIfDecreeHadOfficial(incidentId);
+
+            if (offical != "1")
             {
                 string message = "Открыть происшетсвие для редактирования?" +
                     "\nВы сразу станете должнастным лицом этого происшествия.";
                 string caption = "";
                 MessageBoxButton buttons = MessageBoxButton.YesNo;
                 string result;
-
                 result = Convert.ToString(MessageBox.Show(message, caption, buttons, MessageBoxImage.Question));
 
                 if (result == Convert.ToString(MessageBoxResult.Yes))
                 {
-                    if (CheckIfDecreeHadOfficial(incidentId) == "null")
+                    if (offical == "null")
                     {
                         connection.Open();
                         string SqlInsert = "Update [diploma_Decree] " +
@@ -197,7 +213,7 @@ namespace diploma_app
                         com.ExecuteNonQuery();
                         connection.Close();
                     }
-                    else if (CheckIfDecreeHadOfficial(incidentId) != App.CurrentUserId.ToString())
+                    else if (offical == "0")
                     {
                         connection.Open();
                         string SqlInsert = "Insert into [diploma_Decree] ([decree_date],[id_incident], [id_official]) " +
@@ -206,15 +222,14 @@ namespace diploma_app
                         com.ExecuteNonQuery();
                         connection.Close();
                     }
-
                     IncidentInfoWindow IIW = new IncidentInfoWindow(incidentId);
-                    IIW.Show();
+                    IIW.ShowDialog();
                 }
             }
-            else if (CheckIfDecreeHadOfficial(incidentId) == App.CurrentUserId.ToString())
+            else
             {
                 IncidentInfoWindow IIW = new IncidentInfoWindow(incidentId);
-                IIW.Show();
+                IIW.ShowDialog();
             }
         }
     }

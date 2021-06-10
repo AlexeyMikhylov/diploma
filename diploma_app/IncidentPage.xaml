@@ -40,7 +40,7 @@
                 <ComboBoxItem Content="Все" />
                 <ComboBoxItem Content="На рассмотрении" />
                 <ComboBoxItem Content="Ведется решение" />
-                <ComboBoxItem Content="Возбуждение уголовного дела" />
+                <ComboBoxItem Content="Заведение уголовного дела" />
                 <ComboBoxItem Content="Отказ" />
             </ComboBox>
             <DatePicker x:Name="dtpcr_IncidentFilterDate" Text="Выберите дату" CalendarClosed="dtpcr_IncidentFilterDate_CalendarClosed" />
