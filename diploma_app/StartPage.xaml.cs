@@ -71,15 +71,18 @@ namespace diploma_app
 
         private void CountIncidentsYesterday()
         {
-            // to do sql query
+            connection.Open();
+
+            connection.Close();
 
             //return number
         }
 
         private void CountIncidentsToday()
         {
-            // to do sql query
+            connection.Open();
 
+            connection.Close();
             //return number
         }
 

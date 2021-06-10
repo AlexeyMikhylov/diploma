@@ -239,29 +239,12 @@ namespace diploma_app
         private void dtpckr_incident_date_CalendarClosed(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(dtpckr_incident_date.Text);
-
-            //Console.WriteLine(dtpckr_incident_date.Text.Remove(2)); //day
-            //Console.WriteLine(dtpckr_incident_date.Text.Substring(3).Remove(2)); //month
-            //Console.WriteLine(dtpckr_incident_date.Text.Substring(6)); //year
         }
 
         private void btn_IncidentCancel_Click(object sender, RoutedEventArgs e)
         {
-            //клин энд клир эврисынг
+            Manager.MainFrame.Navigate(new StartPage());
         }
-
-        //Анонимная заявка
-        //private void rdbtn_anonym_Click(object sender, RoutedEventArgs e)
-        //{
-        //    rdbtn_nonanonym.IsChecked = false;
-
-        //    txtbx_last_name.IsEnabled = false;
-        //    txtbx_first_name.IsEnabled = false;
-        //    txtbx_patronymic.IsEnabled = false;
-        //    txtbx_phone.IsEnabled = false;
-        //    txtbx_registration_address.IsEnabled = false;
-        //    cmbbx_Citizenship.IsEnabled = false;
-        //}
 
         private void rdbtn_anonym_Checked(object sender, RoutedEventArgs e)
         {
