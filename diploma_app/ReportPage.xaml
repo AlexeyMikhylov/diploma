@@ -18,6 +18,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="myCmb1" Height="25" Visibility="Collapsed"/>
+            <ComboBox x:Name="myCmb2" Height="25" Visibility="Collapsed"/>
             <ComboBox x:Name="cmbbx_ReportCity" SelectedIndex="0" Height="25" Width="180" SelectionChanged="cmbbx_ReportCity_SelectionChanged" VerticalContentAlignment="Center">
                 <ComboBoxItem Content="Город" />
                 <ComboBoxItem Content="Область" />
@@ -38,7 +40,14 @@
             <Label Content="По" Margin="5" VerticalAlignment="Center" />
             <DatePicker x:Name="dtpckr_to" VerticalContentAlignment="Center" Height="25" />
             <Label Content="Вид графика:" Margin="5" VerticalAlignment="Center" />
-            <ComboBox x:Name="cmbbx_2" SelectionChanged="cmbbx_2_SelectionChanged" SelectedIndex="0" Width="150" Margin="5" >
+            <ComboBox x:Name="cmbbx_2" SelectionChanged="cmbbx_2_SelectionChanged" SelectedIndex="0" Width="150" Margin="5">
+                <ComboBoxItem Content="Выберите" />
+                <ComboBoxItem Content="Линейный" />
+                <ComboBoxItem Content="Гистограмма" />
+                <ComboBoxItem Content="Площадь" />
+                <ComboBoxItem Content="Точки" />
+                <ComboBoxItem Content="Кривая" />
+                <ComboBoxItem Content="Кривая площадь" />
             </ComboBox>
             <Button x:Name="btn_PrintReport" Content="🖨" Click="btn_PrintReport_Click" Height="25" Width="30" Background="White" BorderBrush="Black" Foreground="Black">
                 <Button.Resources>

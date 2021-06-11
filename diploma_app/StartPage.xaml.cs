@@ -110,7 +110,8 @@ namespace diploma_app
 
             // добавим данные линии
             string[] axisXData = new string[] { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье" };
-            double[] axisYData = new[] { 65.0, 57.0, 89.0, 14.0, 51.0, 44.0, 70.0 };
+            //double[] axisYData = new[] { 65.0, 57.0, 89.0, 14.0, 51.0, 44.0, 70.0 };
+            int[] axisYData = new[] { 65, 57, 89, 14, 51, 44, 70 };
             chart.Series["Происшествия"].Points.DataBindXY(axisXData, axisYData);
         }
 
