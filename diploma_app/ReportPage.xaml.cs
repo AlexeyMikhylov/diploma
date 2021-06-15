@@ -27,6 +27,7 @@ namespace diploma_app
         SqlDataAdapter adapter;
         DataTable table;
         string whereCity = "";
+        string whereDate = "";
 
         public ObservableCollection<Incident> Incidents { get; set; }
 
@@ -40,7 +41,7 @@ namespace diploma_app
             };
             chart.Series.Add(currentSeries);
 
-            // Все графики находятся в пределах области построения ChartArea, создадим ее
+            // Все графики находятся в пределах области построения ChartArea
             chart.ChartAreas.Add(new ChartArea("Default"));
 
             // Добавим линию, и назначим ее в ранее созданную область "Default"
