@@ -144,13 +144,6 @@ namespace diploma_app
             return result;
         }
 
-        private void CountIncidentsWeek()
-        {
-            // to do sql query
-
-            //return numbers
-        }
-
         //Форматирование даты
         private void DateFormat()
         {

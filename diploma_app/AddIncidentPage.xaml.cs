@@ -204,6 +204,23 @@ namespace diploma_app
                 {
                     MessageBox.Show("Заполните все данные.");
                 }
+                else
+                {
+                    //вставка адреса
+                    if (GetIncidentAddresId() == "" || GetIncidentAddresId() == null)
+                    {
+                        InsertIncidentAddress();
+                    }
+                    //вставка происшествия
+                    InsertIncident();
+                    //Вставка постановления
+                    InsertIntoDecree();
+                    //вставка причастных
+                    GetIncidentId();
+                    InsertInvolvedAnonym();
+
+                    MessageBox.Show("Успешно");
+                }
             }
             else if (cmbbx_city.Text == "" || txtbx_street.Text == "" ||
                 txtbx_building.Text == "" || txtbx_comment.Text == "" ||

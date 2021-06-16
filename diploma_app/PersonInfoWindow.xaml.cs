@@ -82,9 +82,17 @@ namespace diploma_app
 
         private void UpdateDB()
         {
-            // че-то не то....
-            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterPerson);
-            adapterPerson.Update(person);
+            try
+            {
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterPerson);
+                adapterPerson.Update(person);
+
+                MessageBox.Show("Сохранено.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошбка\nВвод некорректных данных:\nПроверьте тип или длину вводимых данных");
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -101,7 +109,6 @@ namespace diploma_app
         private void btn_save_Click(object sender, RoutedEventArgs e)
         {
             UpdateDB();
-            MessageBox.Show("Сохранено.");
         }
     }
 }
