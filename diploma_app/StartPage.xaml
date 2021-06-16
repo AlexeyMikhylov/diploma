@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:diploma_app"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="StartPage" Loaded="Page_Loaded">
+      Title="Главная страница" Loaded="Page_Loaded">
 
     <Grid>
         <!-- Content -->
@@ -96,12 +96,14 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Происшествий: " FontSize="14" Grid.Row="0" Grid.Column="0"/>
-                    <Label Content="вчера - 18" FontSize="14" Grid.Row="0" Grid.Column="1"/>
-                    <Label Content="сегодня - 10" FontSize="14" Grid.Row="0" Grid.Column="2"/>
-                    <Label Content="Происшествий за последние 7 дней:" FontSize="14" Grid.Row="1" Grid.ColumnSpan="3"/>
+                    <Label x:Name="lbl_yesterday" Content="вчера - 18" FontSize="14" Grid.Row="0" Grid.Column="1"/>
+                    <Label x:Name="lbl_today" Content="сегодня - 10" FontSize="14" Grid.Row="0" Grid.Column="2"/>
+                    <Label Content="Происшествий на этой неделе:" FontSize="14" Grid.Row="1" Grid.ColumnSpan="3"/>
 
                     <!-- graph -->
-
+                    <ComboBox x:Name="myCmb1" Height="25" Visibility="Collapsed"/>
+                    <ComboBox x:Name="myCmb2" Height="25" Visibility="Collapsed"/>
+                    
                     <WindowsFormsHost Grid.Row="2" Grid.ColumnSpan="4" Margin="3,0,3,3">
                         <charts:Chart x:Name="chart">
                             <charts:Chart.Legends>

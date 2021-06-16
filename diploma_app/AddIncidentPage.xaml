@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:diploma_app"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddIncidentPage" ScrollViewer.CanContentScroll="True">
+      Title="Регистрация происшествия" ScrollViewer.CanContentScroll="True">
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
                     </Grid>
 
                     <Label Content="Фабула" />
-                    <TextBox x:Name="txtbx_summary" />
+                    <TextBox x:Name="txtbx_summary" MaxLength="100" />
 
                     <Label Content="Вид происшествия"/>
                     <ComboBox x:Name="cmbbx_IncidentType" SelectedIndex="0">
@@ -80,11 +80,11 @@
                     <ComboBoxItem Content="Углич"/>
                 </ComboBox>
                 <Label Content="Улица" />
-                <TextBox x:Name="txtbx_street" />
+                <TextBox x:Name="txtbx_street" MaxLength="50"/>
                 <Label Content="Дом" />
-                <TextBox x:Name="txtbx_building" />
+                <TextBox x:Name="txtbx_building" MaxLength="50"/>
                 <Label Content="Строение, квартира, и др." />
-                <TextBox x:Name="txtbx_comment" />
+                <TextBox x:Name="txtbx_comment" MaxLength="100"/>
             </StackPanel>
         </GroupBox>
 
@@ -96,15 +96,15 @@
                     <RadioButton x:Name="rdbtn_anonym" Content="Анонимно" VerticalContentAlignment="Center" Checked="rdbtn_anonym_Checked" />
                 </StackPanel>
                 <Label Content="Фамилия" />
-                <TextBox x:Name="txtbx_last_name" />
+                <TextBox x:Name="txtbx_last_name" MaxLength="50"/>
                 <Label Content="Имя" />
-                <TextBox x:Name="txtbx_first_name" />
+                <TextBox x:Name="txtbx_first_name" MaxLength="50"/>
                 <Label Content="Отчество" />
-                <TextBox x:Name="txtbx_patronymic" />
+                <TextBox x:Name="txtbx_patronymic" MaxLength="50"/>
                 <Label Content="Адрес" />
-                <TextBox x:Name="txtbx_registration_address" />
+                <TextBox x:Name="txtbx_registration_address" MaxLength="100"/>
                 <Label Content="Телефон" />
-                <TextBox x:Name="txtbx_phone" />
+                <TextBox x:Name="txtbx_phone" MaxLength="20"/>
                 <Label Content="Гражданство" />
                 <ComboBox x:Name="cmbbx_Citizenship" SelectedIndex="0" >
                     <ComboBoxItem Content="Выберите" />

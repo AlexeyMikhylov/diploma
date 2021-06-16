@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Globalization;
+using System.Runtime;
 
 namespace diploma_app
 {
@@ -25,7 +27,11 @@ namespace diploma_app
     {
         SqlDataAdapter adapter;
         DataTable incidents;
+        SqlDataAdapter adapterGraph;
+        DataTable incidentsGraph;
         SqlConnection connection = new SqlConnection(App.ConnectionString);
+
+        string monday, sunday, month;
 
         public StartPage()
         {
@@ -69,21 +75,73 @@ namespace diploma_app
             Manager.MainFrame.Navigate(new ReportPage());
         }
 
-        private void CountIncidentsYesterday()
+        //Происшествий вчера
+        private string CountIncidentsYesterday()
         {
             connection.Open();
 
+            string SqlSel = "Select count(diploma_KRSP.id_incident) as 'incidents' " +
+                "From diploma_KRSP join diploma_IncidentAddress on " +
+                "diploma_KRSP.id_incident_address = diploma_IncidentAddress.id_incident_address " +
+                "group by year(incident_date), month(incident_date), day(incident_date) " +
+                "having " +
+                "Year(diploma_KRSP.incident_date) = 2021 " +
+                " and month(incident_date) = " + month + " " +
+                " and day(incident_date) = " + DateTime.Now.AddDays(-1).ToString().Remove(2) + " ";
+            SqlCommand com = new SqlCommand(SqlSel, connection);
+
+            string result;
+
+            if (com.ExecuteScalar() == null)
+            {
+                result = "0";
+            }
+            else if (com.ExecuteScalar().ToString() == "")
+            {
+                result = "0";
+            }
+            else
+            {
+                result = com.ExecuteScalar().ToString();
+            }
+
             connection.Close();
 
-            //return number
+            return result;
         }
 
-        private void CountIncidentsToday()
+        //Происшествий сегодня
+        private string CountIncidentsToday()
         {
             connection.Open();
+            string SqlSel = "Select count(diploma_KRSP.id_incident) as 'incidents' " +
+                "From diploma_KRSP join diploma_IncidentAddress on " +
+                "diploma_KRSP.id_incident_address = diploma_IncidentAddress.id_incident_address " +
+                "group by year(incident_date), month(incident_date), day(incident_date) " +
+                "having " +
+                "Year(diploma_KRSP.incident_date) = 2021 " +
+                "and month(incident_date) = " + month + " " +
+                "and day(incident_date) = " + DateTime.Now.ToString().Remove(2) + " ";
+            SqlCommand com = new SqlCommand(SqlSel, connection);
+
+            string result;
+
+            if (com.ExecuteScalar() == null)
+            {
+                result = "0";
+            }
+            else if (com.ExecuteScalar().ToString() == "")
+            {
+                result = "0";
+            }
+            else
+            {
+                result = com.ExecuteScalar().ToString();
+            }
 
             connection.Close();
-            //return number
+
+            return result;
         }
 
         private void CountIncidentsWeek()
@@ -93,28 +151,94 @@ namespace diploma_app
             //return numbers
         }
 
+        //Форматирование даты
         private void DateFormat()
         {
             ((DataGridTextColumn)dtgrid_incidents.Columns[0]).Binding.StringFormat = "dd.MM.yyyy HH:mm";
         }
 
+        private void SqlQueryCountIncidents()
+        {
+            myCmb1.Items.Clear();
+            myCmb2.Items.Clear();
+            SqlConnection connection = new SqlConnection(App.ConnectionString);
+            connection.Open();
+            string SqlSel = "Select count(diploma_KRSP.id_incident) as 'incidents', " +
+                "CONCAT(year(incident_date), '/', month(incident_date), '/', day(incident_date)) as 'date' " +
+                "From diploma_KRSP join diploma_IncidentAddress on " +
+                "diploma_KRSP.id_incident_address = diploma_IncidentAddress.id_incident_address " +
+                "group by year(incident_date), month(incident_date), day(incident_date) " +
+                "having Year(diploma_KRSP.incident_date) = 2021 " +
+                "and month(incident_date) = " + month + " " +
+                "and day(incident_date) between " + monday + " and " + sunday + " " +
+                "order by 'date' asc";
+            SqlCommand com = new SqlCommand(SqlSel, connection);
+            adapterGraph = new SqlDataAdapter(com);
+            incidentsGraph = new DataTable();
+            adapterGraph.Fill(incidentsGraph);
+            for (int i = 0; i < incidentsGraph.Rows.Count; i++)
+            {
+                myCmb1.Items.Add(incidentsGraph.Rows[i]["incidents"].ToString());
+                myCmb2.Items.Add(incidentsGraph.Rows[i]["date"].ToString());
+            }
+
+            connection.Close();
+        }
+
+        private void BuildGraph(ComboBox cmbbx1, ComboBox cmbbx2)
+        {
+            chart.Series["Происшествия"].ChartArea = "Default";
+            chart.Series["Происшествия"].ChartType = SeriesChartType.Column;
+
+            string[] axisXData = new string[cmbbx1.Items.Count];
+            int[] axisYData = new int[cmbbx2.Items.Count];
+
+            for (int i = 0; i < cmbbx1.Items.Count; i++)
+            {
+                axisXData[i] = cmbbx1.Items[i].ToString();
+            }
+            for (int i = 0; i < cmbbx2.Items.Count; i++)
+            {
+                axisYData[i] = Convert.ToInt32(cmbbx2.Items[i]);
+            }
+
+            chart.Series["Происшествия"].Points.DataBindXY(axisXData, axisYData);
+        }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            CurrentWeekDates();
+
+            SqlQueryCountIncidents();
+
+            lbl_yesterday.Content = "Вчера - " + CountIncidentsYesterday();
+            lbl_today.Content = "Сегодня - " + CountIncidentsToday();
+
             FillDataGrid();
 
             DateFormat();
 
-            chart.Series["Происшествия"].ChartArea = "Default";
-            //chart.Series["Series1"].ChartType = SeriesChartType.Line;
-            chart.Series["Происшествия"].ChartType = SeriesChartType.Line;
-
-            // добавим данные линии
-            string[] axisXData = new string[] { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье" };
-            //double[] axisYData = new[] { 65.0, 57.0, 89.0, 14.0, 51.0, 44.0, 70.0 };
-            int[] axisYData = new[] { 65, 57, 89, 14, 51, 44, 70 };
-            chart.Series["Происшествия"].Points.DataBindXY(axisXData, axisYData);
+            BuildGraph(myCmb2, myCmb1);
         }
 
+        private void CurrentWeekDates()
+        {
+            DateTime startOfWeek = DateTime.Today.AddDays(
+                (int)CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek -
+                (int)DateTime.Today.DayOfWeek);
+
+            string result = string.Join("," + Environment.NewLine, Enumerable
+              .Range(0, 7)
+              .Select(i => startOfWeek
+                 .AddDays(i)
+                 .ToString("dd-MM-yyyy")));
+
+            monday = result.Substring(0).Remove(2);
+            sunday = result.Substring(78).Remove(2);
+            month = result.Substring(3).Remove(2);
+        }
+
+        //Навигация
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddIncidentPage());

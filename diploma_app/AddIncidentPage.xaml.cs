@@ -193,11 +193,23 @@ namespace diploma_app
         //сок
         private void btn_IncidentAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbbx_city.Text == "" || txtbx_street.Text == "" ||
+            if (rdbtn_anonym.IsChecked == true)
+            {
+                if (cmbbx_city.Text == "" || txtbx_street.Text == "" ||
+                   txtbx_building.Text == "" || txtbx_comment.Text == "" ||
+                   txtbx_summary.Text == "" ||
+                   txtbx_hour.Text == "" || txtbx_minute.Text == "" ||
+                   cmbbx_FixationForm.SelectedIndex == 0 ||
+                   cmbbx_IncidentType.SelectedIndex == 0 || txtbx_hour.Text.Length < 2 || txtbx_minute.Text.Length < 2)
+                {
+                    MessageBox.Show("Заполните все данные.");
+                }
+            }
+            else if (cmbbx_city.Text == "" || txtbx_street.Text == "" ||
                 txtbx_building.Text == "" || txtbx_comment.Text == "" ||
                 txtbx_last_name.Text == "" || txtbx_first_name.Text == "" ||
                 txtbx_patronymic.Text == "" || txtbx_registration_address.Text == "" ||
-                txtbx_phone.Text == "" || txtbx_summary.Text == "" || 
+                txtbx_phone.Text == "" || txtbx_summary.Text == "" ||
                 txtbx_hour.Text == "" || txtbx_minute.Text == "" ||
                 cmbbx_Citizenship.SelectedIndex == 0 || cmbbx_FixationForm.SelectedIndex == 0 ||
                 cmbbx_IncidentType.SelectedIndex == 0 || txtbx_hour.Text.Length < 2 || txtbx_minute.Text.Length < 2)

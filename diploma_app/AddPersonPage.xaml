@@ -32,15 +32,15 @@
                     <TextBox x:Name="txtbx_incidentId" IsEnabled="False"/>
 
                     <Label Content="Фамилия" />
-                    <TextBox x:Name="txtbx_last_name" />
+                    <TextBox x:Name="txtbx_last_name" MaxLength="50"/>
                     <Label Content="Имя" />
-                    <TextBox x:Name="txtbx_first_name" />
+                    <TextBox x:Name="txtbx_first_name" MaxLength="50"/>
                     <Label Content="Отчество" />
-                    <TextBox x:Name="txtbx_patronymic" />
+                    <TextBox x:Name="txtbx_patronymic" MaxLength="50"/>
                     <Label Content="Адрес" />
-                    <TextBox x:Name="txtbx_registration_address" />
+                    <TextBox x:Name="txtbx_registration_address" MaxLength="100"/>
                     <Label Content="Телефон" />
-                    <TextBox x:Name="txtbx_phone" />
+                    <TextBox x:Name="txtbx_phone" MaxLength="20"/>
                     <Label Content="Гражданство" />
                     <ComboBox x:Name="cmbbx_Citizenship" SelectedIndex="0" >
                         <ComboBoxItem Content="Выберите" />

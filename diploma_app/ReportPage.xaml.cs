@@ -27,7 +27,10 @@ namespace diploma_app
         SqlDataAdapter adapter;
         DataTable table;
         string whereCity = "";
-        string whereDate = "";
+
+        string betweenYear = "between 2021 and 2021";
+        string betweenMonth = "between 01 and 12";
+        string betweenDay = "between 01 and 31";
 
         public ObservableCollection<Incident> Incidents { get; set; }
 
@@ -66,10 +69,14 @@ namespace diploma_app
                 "diploma_KRSP.id_incident_address = diploma_IncidentAddress.id_incident_address " +
                 "group by city, year(incident_date), month(incident_date), day(incident_date) " +
                 "having " +
-                "Year(diploma_KRSP.incident_date) = 2021 and " +
-                "month(incident_date) = 06 and " +
-                "day(incident_date) between 05 and 11 " +
-                " "+whereCity+" ";
+                "Year(diploma_KRSP.incident_date) " +
+                " "+betweenYear+" " +
+                "and month(incident_date) " +
+                " "+betweenMonth+" " +
+                "and day(incident_date) " +
+                " "+betweenDay+" " +
+                " "+whereCity+" " +
+                "order by 'date' asc";
             SqlCommand com = new SqlCommand(SqlSel, connection);
             adapter = new SqlDataAdapter(com);
             table = new DataTable();
@@ -127,7 +134,6 @@ namespace diploma_app
         {
             if (cmbbx_2.SelectedIndex != 0)
                 BuildGraph(myCmb2, myCmb1);
-
         }
 
         private void btn_PrintReport_Click(object sender, RoutedEventArgs e)
@@ -157,6 +163,32 @@ namespace diploma_app
                     SqlQuery();
                     BuildGraph(myCmb2, myCmb1);
                 }
+            }
+        }
+
+        private void dtpckr_from_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            if (dtpckr_from.Text != "" && dtpckr_to.Text != "")
+            {
+                betweenYear = " between " + dtpckr_from.Text.Substring(6) + " and " + dtpckr_to.Text.Substring(6) + " ";
+                betweenMonth = " between " + dtpckr_from.Text.Substring(3).Remove(2) + " " +
+                    "and " + dtpckr_to.Text.Substring(3).Remove(2) + " ";
+                betweenDay = " between " + dtpckr_from.Text.Remove(2) + " and " + dtpckr_to.Text.Remove(2) + " ";
+                SqlQuery();
+                BuildGraph(myCmb2, myCmb1);
+            }
+        }
+
+        private void dtpckr_to_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            if (dtpckr_from.Text != "" && dtpckr_to.Text != "")
+            {
+                betweenYear = " between " + dtpckr_from.Text.Substring(6) + " and " + dtpckr_to.Text.Substring(6) + " ";
+                betweenMonth = " between " + dtpckr_from.Text.Substring(3).Remove(2) + " " +
+                    "and " + dtpckr_to.Text.Substring(3).Remove(2) + " ";
+                betweenDay = " between " + dtpckr_from.Text.Remove(2) + " and " + dtpckr_to.Text.Remove(2) + " ";
+                SqlQuery();
+                BuildGraph(myCmb2, myCmb1);
             }
         }
     }

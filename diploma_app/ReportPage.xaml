@@ -9,7 +9,7 @@
       xmlns:local="clr-namespace:diploma_app"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ReportPage" Loaded="Page_Loaded">
+      Title="Анализ данных" Loaded="Page_Loaded">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -36,9 +36,9 @@
                 <ComboBoxItem Content="Углич"/>
             </ComboBox>
             <Label Content="С" Margin="5" VerticalAlignment="Center" />
-            <DatePicker x:Name="dtpckr_from" VerticalContentAlignment="Center" Height="25" />
+            <DatePicker x:Name="dtpckr_from" VerticalContentAlignment="Center" Height="25" CalendarClosed="dtpckr_from_CalendarClosed" FirstDayOfWeek="Monday" Text="Выберите" />
             <Label Content="По" Margin="5" VerticalAlignment="Center" />
-            <DatePicker x:Name="dtpckr_to" VerticalContentAlignment="Center" Height="25" />
+            <DatePicker x:Name="dtpckr_to" VerticalContentAlignment="Center" Height="25" CalendarClosed="dtpckr_to_CalendarClosed" FirstDayOfWeek="Monday" Text="Выберите" />
             <Label Content="Вид графика:" Margin="5" VerticalAlignment="Center" />
             <ComboBox x:Name="cmbbx_2" SelectionChanged="cmbbx_2_SelectionChanged" SelectedIndex="0" Width="150" Margin="5">
                 <ComboBoxItem Content="Выберите" />
